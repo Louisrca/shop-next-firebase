@@ -8,13 +8,14 @@ import { useRouter } from "next/navigation";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../api/firebase-config";
 
-// import { useAuth } from '../context/AuthUserContext';
+import { useUserContext } from "@/context/AuthUserProvider";
 
 const SignUp = () => {
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState("");
   const router = useRouter();
   const [error, setError] = useState("");
+  const setUuidUser = ;
 
   const handleOnSubmit = async (event: any) => {
     event.preventDefault();
@@ -22,6 +23,7 @@ const SignUp = () => {
       if (password)
         await createUserWithEmailAndPassword(auth, email, password).then(() => {
           console.log("Success. The user is created in Firebase");
+          useUserContext(email);
           router.push("/home");
         });
     } catch (e) {
