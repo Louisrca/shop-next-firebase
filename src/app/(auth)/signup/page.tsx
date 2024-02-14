@@ -16,7 +16,7 @@ const SignUp = () => {
   const router = useRouter();
   const { signUp } = useAuth();
 
-  console.log(role);
+
 
   const handleOnSubmit = async (event: FormEvent) => {
     event.preventDefault();
@@ -69,7 +69,6 @@ const SignUp = () => {
           <Switch
             checked={checked}
             onClick={() => {
-              console.log(checked);
               setChecked(!checked);
               checked ? setRole("seller") : setRole("client");
             }}
