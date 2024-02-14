@@ -5,6 +5,7 @@ import React, {
   useState,
   createContext,
   useEffect,
+  use,
 } from "react";
 
 import { User } from "@/app/model/user";
@@ -22,18 +23,26 @@ interface UserType {
   uid: string | null;
 }
 
-const AuthContext = createContext({});
 
-interface AuthProviderProps {
-  children: ReactNode;
-}
+
+
+
+const AuthContext = createContext({});
 
 export const useAuth = () => useContext<any>(AuthContext);
 
-export const AuthProvider = ({ children }: AuthProviderProps) => {
+
+
+export const AuthProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
+  // Define the constants for the user and loading state
   const [user, setUser] = useState<UserType>({ email: null, uid: null });
   const [loading, setLoading] = useState<Boolean>(true);
 
+  // Update the state depending on auth
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -41,6 +50,10 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
           email: user.email,
           uid: user.uid,
         });
+
+        console.log("User:", user);
+        console.log("User Email:", user.email);
+        console.log("User UID:", user.uid);
       } else {
         setUser({ email: null, uid: null });
       }
@@ -51,6 +64,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     return () => unsubscribe();
   }, []);
 
+  // Sign up the user
   const signUp = (email: string, password: string) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
@@ -66,6 +80,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     return await signOut(auth);
   };
 
+  // Wrap the children with the context provider
   return (
     <AuthContext.Provider value={{ user, signUp, logIn, logOut }}>
       {loading ? null : children}
