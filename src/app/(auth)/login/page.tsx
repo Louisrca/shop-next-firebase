@@ -24,7 +24,7 @@ const LogIn = () => {
     try {
       if (password)
         await signInWithEmailAndPassword(auth, email, password).then(() => {
-          console.log("Success. The user is created in Firebase");
+          console.log("Success. The user is logged in Firebase");
           router.push("/home");
         });
     } catch (e) {
