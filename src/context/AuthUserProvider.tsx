@@ -1,3 +1,4 @@
+"use client";
 import React, {
   ReactNode,
   useContext,
@@ -27,7 +28,7 @@ interface AuthProviderProps {
   children: ReactNode;
 }
 
-export const useAuth = () => useContext(AuthContext);
+export const useAuth = () => useContext<any>(AuthContext);
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<UserType>({ email: null, uid: null });
