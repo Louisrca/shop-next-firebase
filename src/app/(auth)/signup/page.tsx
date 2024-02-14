@@ -2,36 +2,25 @@
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
 import { useRouter } from "next/navigation";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../api/firebase-config";
-import { useForm } from "react-hook-form";
 
 // import { useAuth } from '../context/AuthUserContext';
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
-  const [passwordOne, setPasswordOne] = useState("");
+  const [password, setPassword] = useState("");
   const router = useRouter();
   const [error, setError] = useState("");
-  const form = useForm();
 
   const handleOnSubmit = async (event: any) => {
     event.preventDefault();
     try {
-      if (passwordOne)
-        createUserWithEmailAndPassword(auth, email, passwordOne)
+      if (password)
+        createUserWithEmailAndPassword(auth, email, password)
           .then(() => {
             console.log("Success. The user is created in Firebase");
             router.push("/login");
@@ -47,37 +36,21 @@ const SignUp = () => {
   };
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleOnSubmit)} className="space-y-8">
-        <FormField
-          control={form.control}
-          name="username"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Username</FormLabel>
-              <FormControl>
-                <Input placeholder="email" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+    <form onSubmit={handleOnSubmit} className="space-y-8">
+      <div>
+        <label>Username</label>
+        <Input placeholder="email" onChange={(e) => setEmail(e.target.value)} />
+      </div>
+      <div>
+        <label>Password</label>
+        <Input
+          placeholder="password"
+          type="password"
+          onChange={(e) => setPassword(e.target.value)}
         />
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Username</FormLabel>
-              <FormControl>
-                <Input placeholder="password" type="password" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button type="submit">Submit</Button>
-      </form>
-    </Form>
+      </div>
+      <Button type="submit">Submit</Button>
+    </form>
   );
 };
 
