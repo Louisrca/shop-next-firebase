@@ -11,10 +11,12 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
-  const [checked, setChecked] = useState(false);
-  const [role, setRole] = useState("seller");
+  const [checked, setChecked] = useState(true);
+  const [role, setRole] = useState("client");
   const router = useRouter();
   const { signUp } = useAuth();
+
+  console.log(role);
 
   const handleOnSubmit = async (event: FormEvent) => {
     event.preventDefault();
@@ -62,13 +64,18 @@ const SignUp = () => {
       </div>
 
       <div>
-        <Switch
-          checked={checked}
-          onChange={() => {
-            setChecked(!checked);
-            setRole(checked ? "seller" : "client");
-          }}
-        />
+        <label>Role</label>
+        <div className="flex space-x-4">
+          <Switch
+            checked={checked}
+            onClick={() => {
+              console.log(checked);
+              setChecked(!checked);
+              checked ? setRole("seller") : setRole("client");
+            }}
+          />
+          <span>{role}</span>
+        </div>
       </div>
       <div>
         <Button type="submit">Submit</Button>
