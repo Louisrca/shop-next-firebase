@@ -50,10 +50,6 @@ export const AuthProvider = ({
           email: user.email,
           uid: user.uid,
         });
-
-        console.log("User:", user);
-        console.log("User Email:", user.email);
-        console.log("User UID:", user.uid);
       } else {
         setUser({ email: null, uid: null });
       }
