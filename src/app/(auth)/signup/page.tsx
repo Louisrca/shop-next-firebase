@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, FormEvent } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -14,9 +14,9 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
-  const [error, setError] = useState("");
+  // const [error, setError] = useState("");
 
-  const handleOnSubmit = async (event: any) => {
+  const handleOnSubmit = async (event: FormEvent) => {
     event.preventDefault();
     try {
       if (password)
