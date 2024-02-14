@@ -8,9 +8,7 @@ import React, {
   use,
 } from "react";
 
-import { User } from "@/app/model/user";
-
-import { auth } from "../app/api/firebase-config";
+import { auth, db } from "../app/api/firebase-config";
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
@@ -18,26 +16,20 @@ import {
   signOut,
 } from "firebase/auth";
 
+import firebase from "firebase/app";
+import "firebase/firestore";
+import { doc, setDoc, serverTimestamp } from "firebase/firestore";
+
 interface UserType {
   email: string | null;
   uid: string | null;
 }
 
-
-
-
-
 const AuthContext = createContext({});
 
 export const useAuth = () => useContext<any>(AuthContext);
 
-
-
-export const AuthProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   // Define the constants for the user and loading state
   const [user, setUser] = useState<UserType>({ email: null, uid: null });
   const [loading, setLoading] = useState<Boolean>(true);
@@ -61,8 +53,30 @@ export const AuthProvider = ({
   }, []);
 
   // Sign up the user
-  const signUp = (email: string, password: string) => {
-    return createUserWithEmailAndPassword(auth, email, password);
+  const signUp = async (
+    email: string,
+    password: string,
+    firstname: string,
+    lastname: string,
+    role: string
+  ) => {
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    const user = userCredential.user;
+    if (user) {
+      await setDoc(doc(db, "users", user.uid), {
+        email: user.email,
+        id: user.uid,
+        firstname: firstname,
+        lastname: lastname,
+        role: role,
+      });
+      return user;
+    }
+    throw new Error("User creation failed");
   };
 
   // Login the user
