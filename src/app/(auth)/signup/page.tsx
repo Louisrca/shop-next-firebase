@@ -1,33 +1,33 @@
 "use client";
 import { useState } from "react";
 
+import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+
 import { useRouter } from "next/navigation";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../api/firebase-config";
+import { useForm } from "react-hook-form";
 
 // import { useAuth } from '../context/AuthUserContext';
-
-import {
-  Container,
-  Row,
-  Col,
-  Button,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  Alert,
-} from "reactstrap";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [passwordOne, setPasswordOne] = useState("");
   const router = useRouter();
   const [error, setError] = useState("");
+  const form = useForm();
 
-  // createUserWithEmailAndPassword(auth, email, passwordOne)
-
-  const onSubmit = async (event: any) => {
+  const handleOnSubmit = async (event: any) => {
     event.preventDefault();
     try {
       if (passwordOne)
@@ -47,55 +47,37 @@ const SignUp = () => {
   };
 
   return (
-    <Container className="text-center custom-container">
-      <Row>
-        <Col>
-          <Form className="custom-form" onSubmit={onSubmit}>
-            {error && <Alert color="danger">{error}</Alert>}
-            <FormGroup row>
-              <Label for="signUpEmail" sm={4}>
-                Email
-              </Label>
-              <Col sm={8}>
-                <Input
-                  type="email"
-                  value={email}
-                  onChange={(event) => setEmail(event.target.value)}
-                  name="email"
-                  id="signUpEmail"
-                  placeholder="Email"
-                />
-              </Col>
-            </FormGroup>
-            <FormGroup row>
-              <Label for="signUpPassword" sm={4}>
-                Password
-              </Label>
-              <Col sm={8}>
-                <Input
-                  type="password"
-                  name="passwordOne"
-                  value={passwordOne}
-                  onChange={(event) => setPasswordOne(event.target.value)}
-                  id="signUpPassword"
-                  placeholder="Password"
-                />
-              </Col>
-            </FormGroup>
-            <FormGroup row>
-              <Label for="signUpPassword2" sm={4}>
-                Confirm Password
-              </Label>
-            </FormGroup>
-            <FormGroup row>
-              <Col>
-                <Button>Sign Up</Button>
-              </Col>
-            </FormGroup>
-          </Form>
-        </Col>
-      </Row>
-    </Container>
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(handleOnSubmit)} className="space-y-8">
+        <FormField
+          control={form.control}
+          name="username"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Username</FormLabel>
+              <FormControl>
+                <Input placeholder="email" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="password"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Username</FormLabel>
+              <FormControl>
+                <Input placeholder="password" type="password" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button type="submit">Submit</Button>
+      </form>
+    </Form>
   );
 };
 
