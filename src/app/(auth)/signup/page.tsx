@@ -20,16 +20,10 @@ const SignUp = () => {
     event.preventDefault();
     try {
       if (password)
-        createUserWithEmailAndPassword(auth, email, password)
-          .then(() => {
-            console.log("Success. The user is created in Firebase");
-            router.push("/login");
-          })
-          .catch((error) => {
-            // An error occurred. Set error message to be displayed to user
-            setError(error.message);
-          });
-      else setError("Password do not match");
+        await createUserWithEmailAndPassword(auth, email, password).then(() => {
+          console.log("Success. The user is created in Firebase");
+          router.push("/home");
+        });
     } catch (e) {
       console.log(e);
     }
@@ -49,7 +43,10 @@ const SignUp = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
-      <Button type="submit">Submit</Button>
+      <div>
+        <Button type="submit">Submit</Button>
+      </div>
+      <Button onClick={() => router.push("/login")}>Log In ? </Button>
     </form>
   );
 };
