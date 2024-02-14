@@ -41,7 +41,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
           uid: user.uid,
         });
       } else {
-        setUser({ email: null, id: null });
+        setUser({ email: null, uid: null });
       }
     });
 
