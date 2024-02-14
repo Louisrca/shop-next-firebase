@@ -14,17 +14,22 @@ const SignUp = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState("");
   const router = useRouter();
-  // const [error, setError] = useState("");
+  const setUuidUser = useUserContext();
 
   const handleOnSubmit = async (event: FormEvent) => {
     event.preventDefault();
     try {
       if (password)
-        await createUserWithEmailAndPassword(auth, email, password).then(() => {
-          console.log("Success. The user is created in Firebase");
-          useUserContext(email);
-          router.push("/home");
-        });
+        await createUserWithEmailAndPassword(auth, email, password).then(
+          async (userCredentials) => {
+            const user = userCredentials.user;
+            console.log("Success. The user is created in Firebase");
+            if (user) {
+              setUuidUser(user.uid);
+              router.push("/home");
+            }
+          }
+        );
     } catch (e) {
       console.log(e);
     }

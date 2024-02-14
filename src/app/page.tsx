@@ -1,4 +1,4 @@
-import AuthUserContext from "@/context/AuthUserContext";
+import AuthUserContext from "@/context/AuthUserProvider";
 import Image from "next/image";
 import SignUp from "./(auth)/signup/page";
 

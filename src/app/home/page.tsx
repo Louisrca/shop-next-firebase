@@ -1,11 +1,11 @@
 "use client";
 import React, { useContext } from "react";
-import { AuthContext } from "@/context/AuthUserProvider";
+import { useUserContext } from "@/context/AuthUserProvider";
 
 export default function page() {
-  const uuidUser = useContext(AuthContext);
+  const email = useUserContext();
 
   // Now you can use uuidUser in your component
-  console.log("UUID User:", uuidUser);
+  console.log("UUID User:", email);
   return <div>Youre in Home Page</div>;
 }
