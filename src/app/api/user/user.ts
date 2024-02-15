@@ -1,0 +1,16 @@
+import { User } from "../../model/user";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../firebase-config";
+
+export const getUserById = async (user: User, uid: string) => {
+  if (user && uid) {
+    const userDocRef = doc(db, "users", uid);
+    const userSnapshot = await getDoc(userDocRef);
+    if (userSnapshot.exists()) {
+      return userSnapshot.data() as User;
+    } else {
+      console.log("No such user!");
+      return undefined;
+    }
+  }
+};

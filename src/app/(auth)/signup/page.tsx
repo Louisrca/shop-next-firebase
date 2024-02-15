@@ -74,10 +74,10 @@ const SignUp = () => {
           <span>{role}</span>
         </div>
       </div>
-      <div>
-        <Button type="submit">Submit</Button>
+      <div className="flex space-x-5">
+        <Button onClick={() => router.push("/login")}>Log In ? </Button>
+        <Button disabled={!email || !password || !firstname || !lastname} type="submit">Submit</Button>
       </div>
-      <Button onClick={() => router.push("/login")}>Log In ? </Button>
     </form>
   );
 };
