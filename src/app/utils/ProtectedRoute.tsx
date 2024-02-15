@@ -32,7 +32,7 @@ export default function ProtectedRoute({
     } else {
       router.push("/");
     }
-  }, []);
+  }, [user, role]);
 
   return <>{children}</>;
 }
