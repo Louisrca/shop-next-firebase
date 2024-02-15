@@ -21,9 +21,11 @@ export const getProducts = async () => {
 
   const products: Products[] = []
   productsSnapshot.forEach((doc) => {
-    products.push(doc.data() as Products)
-  })
-}
+    products.push(doc.data() as Products);
+  });
+
+  return products;
+};
 
 export const createProduct = async (product: Products) => {
   const productsCollectionRef = collection(db, 'products')
