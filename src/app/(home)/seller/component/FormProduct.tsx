@@ -1,7 +1,7 @@
 "use client";
 
 import { Products } from "@/app/model/products";
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { getProducts, updateProduct } from "../../../api/products/products";
 import {
     Card,
@@ -18,25 +18,30 @@ import { Button } from "@/components/ui/button";
 
 
 const FormProduct = ({id, name, description, price, file, category, user} : Products )=> {
-  const [products, setProducts] = useState<Products[]>([]);
-  
   const [productName, setProductName] = useState<string|undefined>(name)
   const [productDescription, setProductDescription] = useState<string|undefined>(description)
   const [productPrice, setProductPrice] = useState<string|undefined>(price?.toString())
   const [productFile, setProductFile] = useState<string|undefined>(file)
   const [productCategory, setProductCategory] = useState<string|undefined>(category)
+
   
-  useEffect(() => {
-    const fetchProduct = async () => {
-      const productData = await getProducts();
-      setProducts(productData);
-    };
 
-    fetchProduct();
-  }, []);
+  const handleOnSubmit= async (e : FormEvent<HTMLFormElement>)=>{
+    e.preventDefault();
+    const updatedProduct = { id, // Assuming the product ID is not being changed
+    user: user,
+    name: productName,
+    description: productDescription,
+    price: parseFloat(productPrice || '0'), // Convert to number if needed
+    file: productFile, // Assuming the file is not being changed
+    category: productCategory}
+    
 
-  const handleOnSubmit=()=>{
-    // updateProduct({ ...productData, [e.target.name]: e.target.value })
+    //  il faut ajouter l'id dans la table de données /products
+
+  
+    // await updateProduct(updatedProduct)
+
   }
 
   return (
