@@ -1,20 +1,20 @@
-"use client";
-import { useState, FormEvent } from "react";
+'use client'
+import { useState, FormEvent } from 'react'
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 
-import { useRouter } from "next/navigation";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../config/firebase-config";
+import { useRouter } from 'next/navigation'
+import { signInWithEmailAndPassword } from 'firebase/auth'
+import { auth } from '../../config/firebase-config'
 
 const LogIn = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const router = useRouter();
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const router = useRouter()
 
   const handleOnSubmit = async (event: FormEvent) => {
-    event.preventDefault();
+    event.preventDefault()
     try {
       if (password)
         await signInWithEmailAndPassword(auth, email, password).then(() => {
@@ -22,9 +22,9 @@ const LogIn = () => {
           location.reload();
         });
     } catch (e) {
-      console.log(e);
+      console.log(e)
     }
-  };
+  }
 
   return (
     <form onSubmit={handleOnSubmit} className="space-y-8">
@@ -41,13 +41,13 @@ const LogIn = () => {
         />
       </div>
       <div className="flex space-x-5">
-        <Button onClick={() => router.push("/")}>Sign Up ? </Button>
+        <Button onClick={() => router.push('/')}>Sign Up ? </Button>
         <Button disabled={!email || !password} type="submit">
           Submit
         </Button>
       </div>
     </form>
-  );
-};
+  )
+}
 
-export default LogIn;
+export default LogIn

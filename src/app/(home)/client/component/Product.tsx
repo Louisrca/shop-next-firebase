@@ -20,11 +20,15 @@ const Product = () => {
   return (
     <div>
       {products.length <= 0 ? (
-        <div> Aucune donnée!</div>
+        <p>Loading...</p>
       ) : (
-        products.map((product: Products) => {
-          <div key={product.id}>{product.description}</div>;
-        })
+        products.map((product) => (
+          <div key={product.id}>
+            <h2>{product.name}</h2>
+            <p>{product.description}</p>
+            <p>{product.price}</p>
+          </div>
+        ))
       )}
     </div>
   );

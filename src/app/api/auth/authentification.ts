@@ -1,5 +1,5 @@
 const authentification = () => {
-  return;
-};
+  return
+}
 
-export default authentification;
+export default authentification

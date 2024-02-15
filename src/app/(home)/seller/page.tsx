@@ -1,9 +1,9 @@
-"use client";
+'use client'
 
-import AddProduct from "@/app/(home)/seller/component/AddProduct";
+import AddProduct from '@/app/(home)/seller/component/AddProduct'
 
 const HomeSeller = () => {
-  return <AddProduct />;
-};
+  return <AddProduct />
+}
 
-export default HomeSeller;
+export default HomeSeller

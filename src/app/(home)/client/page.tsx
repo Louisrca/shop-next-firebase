@@ -9,7 +9,7 @@ const HomeClient = () => {
       <BasketProduct />
       <Product />
     </div>
-  );
-};
+  )
+}
 
-export default HomeClient;
+export default HomeClient

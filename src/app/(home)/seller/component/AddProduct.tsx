@@ -1,85 +1,85 @@
-"use client";
-import React, { FormEvent, useEffect, useState } from "react";
-import { useAuth } from "@/context/AuthUserProvider";
-import { db } from "../../../config/firebase-config";
-import { doc } from "firebase/firestore";
+'use client'
+import React, { FormEvent, useEffect, useState } from 'react'
+import { useAuth } from '@/context/AuthUserProvider'
+import { db } from '../../../config/firebase-config'
+import { doc } from 'firebase/firestore'
 
-import { Products } from "@/app/model/products";
+import { Products } from '@/app/model/products'
 
-import { createProduct } from "@/app/api/products/products";
-import { uploadFile } from "@/lib/uploadFile";
+import { createProduct } from '@/app/api/products/products'
+import { uploadFile } from '@/lib/uploadFile'
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { User } from "../../../model/user";
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { User } from '../../../model/user'
 
 const AddProduct = () => {
-  const { user } = useAuth();
+  const { user } = useAuth()
 
   const [productData, setProductData] = useState<Products>({
-    name: "",
-    description: "",
+    name: '',
+    description: '',
     price: 0,
-    category: "",
-    file: "",
+    category: '',
+    file: '',
     user: `/users/${user?.uid}`,
-  });
+  })
 
-  let userRef: User | null = null;
+  let userRef: User | null = null
 
   useEffect(() => {
-    console.log("useEffect", productData);
-  }, [productData]);
+    console.log('useEffect', productData)
+  }, [productData])
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
+    const files = e.target.files
 
     if (!files || files.length === 0) {
-      console.log("No file selected.");
-      return;
+      console.log('No file selected.')
+      return
     }
 
-    const file = files[0];
+    const file = files[0]
 
     try {
-      const fileUrl = await uploadFile(file);
+      const fileUrl = await uploadFile(file)
 
       setProductData((prevProductData) => ({
         ...prevProductData,
         file: fileUrl,
-      }));
+      }))
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
-  };
+  }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setProductData({ ...productData, [e.target.name]: e.target.value });
-  };
+    setProductData({ ...productData, [e.target.name]: e.target.value })
+  }
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault()
 
     if (user && user.uid) {
-      userRef = doc(db, "users", user.uid);
-      return userRef?.id;
+      userRef = doc(db, 'users', user.uid)
+      return userRef?.id
     } else {
-      console.error("No user found");
+      console.error('No user found')
     }
 
     if (!productData.file) {
-      console.log("No file selected.");
-      return;
+      console.log('No file selected.')
+      return
     }
 
     try {
-      await createProduct(productData);
+      await createProduct(productData)
 
-      console.log("Product uploaded successfully", productData);
+      console.log('Product uploaded successfully', productData)
     } catch (error) {
-      console.error("An error occurred during the product upload:", error);
+      console.error('An error occurred during the product upload:', error)
     }
-  };
+  }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-8">
@@ -124,7 +124,7 @@ const AddProduct = () => {
 
       <Button type="submit">Add Product</Button>
     </form>
-  );
-};
+  )
+}
 
-export default AddProduct;
+export default AddProduct
