@@ -11,18 +11,20 @@ export default function ProtectedRoute({
   children: React.ReactNode;
 }) {
   const [role, setRole] = useState<string | null>();
+  console.log("🚀 ~ role:", role);
   const router = useRouter();
   const { user } = useAuth();
+  console.log("🚀 ~ user:", user);
 
   useEffect(() => {
     const fetchData = async () => {
       if (user) {
-        const data = await getUserById(user, user.uid);
+        const data = await getUserById(user, user?.uid);
         setRole(data?.role);
       }
     };
     fetchData();
-  }, [user]);
+  }, []);
 
   useEffect(() => {
     if (user && role === "seller") {
@@ -32,7 +34,7 @@ export default function ProtectedRoute({
     } else {
       router.push("/");
     }
-  }, [role]);
+  }, []);
 
   return <>{children}</>;
 }
