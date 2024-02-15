@@ -1,0 +1,19 @@
+version: '2'
+
+services:
+  nextjs:
+    container_name: nextjs_container
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - .:/app
+    networks:
+      - app-network
+networks:
+  app-network:
+    driver: bridge
