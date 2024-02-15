@@ -19,7 +19,7 @@ const AddProduct = () => {
   const [productData, setProductData] = useState<Products>({
     name: '',
     description: '',
-    price: 0,
+    price: "0",
     category: '',
     file: '',
     user: `/users/${user?.uid}`,

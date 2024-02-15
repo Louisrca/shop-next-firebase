@@ -1,4 +1,4 @@
-import { deleteDoc, doc, getDocs, getDoc, collection, addDoc, updateDoc } from 'firebase/firestore'
+import { deleteDoc, doc, getDocs, getDoc, collection, addDoc, updateDoc, documentId, setDoc } from 'firebase/firestore'
 import { db } from '../../config/firebase-config'
 import { Products } from '@/app/model/products'
 
@@ -33,19 +33,12 @@ export const createProduct = async (product: Products) => {
 }
 
 export const updateProduct = async (product: Products) => {
-  try {
     const productsCollectionRef = collection(db, 'products');
     const productDocRef = doc(productsCollectionRef, product.id);
-    
-    // Pass the product object directly to updateDoc without wrapping it
     await updateDoc(productDocRef, {product});
-
     return productDocRef.id;
-  } catch (error) {
-    console.error('Error updating product:', error);
-    throw error;
-  }
 };
+
 export const deleteProduct = async (productId: string) => {
   const productDocRef = doc(db, 'products', productId)
   await deleteDoc(productDocRef)

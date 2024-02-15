@@ -20,7 +20,7 @@ import { Button } from "@/components/ui/button";
 const FormProduct = ({id, name, description, price, file, category, user} : Products )=> {
   const [productName, setProductName] = useState<string|undefined>(name)
   const [productDescription, setProductDescription] = useState<string|undefined>(description)
-  const [productPrice, setProductPrice] = useState<string|undefined>(price?.toString())
+  const [productPrice, setProductPrice] = useState<string|undefined>(price)
   const [productFile, setProductFile] = useState<string|undefined>(file)
   const [productCategory, setProductCategory] = useState<string|undefined>(category)
 
@@ -32,7 +32,7 @@ const FormProduct = ({id, name, description, price, file, category, user} : Prod
     user: user,
     name: productName,
     description: productDescription,
-    price: parseFloat(productPrice || '0'), // Convert to number if needed
+    price: productPrice , // Convert to number if needed
     file: productFile, // Assuming the file is not being changed
     category: productCategory}
     
