@@ -1,5 +1,18 @@
-import React from "react";
+"use client";
+import { Button } from "@/components/ui/button";
+import { useAuth } from "@/context/AuthUserProvider";
 
 export default function HomeClient() {
-  return <div>page</div>;
+  const { user, logOut } = useAuth();
+  return (
+    <div>
+      <Button
+        onClick={() => {
+          logOut();
+        }}
+      >
+        Logout
+      </Button>
+    </div>
+  );
 }

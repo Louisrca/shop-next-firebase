@@ -3,7 +3,6 @@ import { useAuth } from "@/context/AuthUserProvider";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { getUserById } from "../api/user/user";
-import { User } from "../model/user";
 
 export default function ProtectedRoute({
   children,
@@ -25,12 +24,16 @@ export default function ProtectedRoute({
     };
     fetchData();
 
-    if (user && role === "seller") {
-      router.push("/home");
-    } else if (user && role === "client") {
-      router.push("/home-client");
-    } else {
-      router.push("/");
+    switch (role) {
+      case "seller":
+        if (user) router.push("/home");
+        break;
+      case "client":
+        if (user) router.push("/home-client");
+        break;
+      default:
+        router.push("/");
+        break;
     }
   }, [user, role]);
 
