@@ -1,18 +1,38 @@
+"use client";
 import { useAuth } from "@/context/AuthUserProvider";
-import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
+import { getUserById } from "../api/user/user";
+import { User } from "../model/user";
 
-const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+export default function ProtectedRoute({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const [role, setRole] = useState<string | null>();
   const router = useRouter();
   const { user } = useAuth();
 
   useEffect(() => {
-    if (!user.uid) {
+    const fetchData = async () => {
+      if (user) {
+        const data = await getUserById(user, user.uid);
+        setRole(data?.role);
+      }
+    };
+    fetchData();
+  }, [user]);
+
+  useEffect(() => {
+    if (user && role === "seller") {
+      router.push("/home");
+    } else if (user && role === "client") {
+      router.push("/home-client");
+    } else {
       router.push("/");
     }
-  }, [router, user]);
+  }, [role]);
 
-  return <div>{user ? children : null}</div>;
-};
-
-export default ProtectedRoute;
+  return <>{children}</>;
+}

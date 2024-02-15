@@ -7,10 +7,19 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+<<<<<<< Updated upstream
 import { User } from "../model/user";
 
 export default function Home() {
   const { user } = useAuth();
+=======
+import { getUserById } from "../api/user/user";
+import { User } from "../model/user";
+
+export default function Home() {
+  const { user, logOut } = useAuth();
+
+>>>>>>> Stashed changes
   const [productData, setProductData] = useState({
     file: "",
     name: "",

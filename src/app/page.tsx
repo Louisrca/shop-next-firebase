@@ -1,15 +1,14 @@
 "use client";
-import { useAuth } from "@/context/AuthUserProvider";
-import { useEffect, useState } from "react";
+
 import SignUp from "./(auth)/signup/page";
-import { getUserById } from "./api/user/user";
-import { User } from "./model/user";
+
 
 
 
 
 
 export default function Home() {
+<<<<<<< Updated upstream
 
   const [role, setRole] = useState<User>();
 
@@ -23,6 +22,8 @@ export default function Home() {
     fetchData();
   }, [user]);
   console.log(role);
+=======
+>>>>>>> Stashed changes
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
