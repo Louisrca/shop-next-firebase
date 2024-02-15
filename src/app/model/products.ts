@@ -1,4 +1,4 @@
-import { User } from "./user";
+
 
 export interface Products {
   id?: string | null;

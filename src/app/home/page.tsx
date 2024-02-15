@@ -1,9 +1,9 @@
 "use client";
 import React, { FormEvent, useEffect, useState } from "react";
 import { useAuth } from "@/context/AuthUserProvider";
-import app, { db } from "../config/firebase-config";
-import { addDoc, collection, doc, getFirestore } from "firebase/firestore";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import  { db } from "../config/firebase-config";
+import { doc} from "firebase/firestore";
+
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -23,7 +23,7 @@ export default function Home() {
     price: 0,
     category: "",
     file: "",
-    user: user?.uid ?? "",
+    user: `/users/${user?.uid}`,
   });
 
   let userRef: User | null = null;
