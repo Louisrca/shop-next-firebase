@@ -1,8 +1,7 @@
-import { deleteDoc, doc, getDoc } from 'firebase/firestore'
+import { deleteDoc, doc, getDocs, getDoc, collection, addDoc } from 'firebase/firestore'
 import { db } from '../../config/firebase-config'
 import { Products } from '@/app/model/products'
-import { collection, addDoc } from 'firebase/firestore'
-import { getDocs } from 'firebase/firestore'
+
 
 export const getProductById = async (productId: string) => {
   const productDocRef = doc(db, 'products', productId)

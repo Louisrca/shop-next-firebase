@@ -120,7 +120,7 @@ const AddProduct = () => {
           onChange={handleInputChange}
         />
       </div>
-      <Input type="file" onChange={handleFileChange} />
+      <Input type="file" accept='accept="image/*' onChange={handleFileChange} />
 
       <Button type="submit">Add Product</Button>
     </form>

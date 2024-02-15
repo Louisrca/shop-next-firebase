@@ -2,6 +2,7 @@
 
 import Navbar from "./component/Navbar";
 
+
 export default function HomeLayout({
   children,
 }: {

@@ -3,6 +3,14 @@
 import { Products } from "@/app/model/products";
 import { useEffect, useState } from "react";
 import { getProducts } from "../../../api/products/products";
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+  } from "@/components/ui/card"
 
 const Product = () => {
   const [products, setProducts] = useState<Products[]>([]);
@@ -23,11 +31,26 @@ const Product = () => {
         <p>Loading...</p>
       ) : (
         products.map((product) => (
-          <div key={product.id}>
-            <h2>{product.name}</h2>
-            <p>{product.description}</p>
+          
+          <Card key={product.id}>
+          <CardHeader>
+            <CardTitle>{product.name}</CardTitle>
+            <CardDescription>{product.description}</CardDescription>
+          </CardHeader>
+          <CardContent>
             <p>{product.price}</p>
-          </div>
+          </CardContent>
+          <CardContent>
+          {product.file && product.description ? (
+              <img src={product.file} alt={product.description} />
+            ) : (
+              <span>Image non disponible</span>
+            )}
+          </CardContent>
+          <CardFooter>
+            <p>{product.category}</p>
+          </CardFooter>
+        </Card>
         ))
       )}
     </div>
