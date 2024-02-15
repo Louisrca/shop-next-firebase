@@ -36,8 +36,18 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
       }
     };
 
-    fetchData();
-  }, [user, role, router]);
+    switch (role) {
+      case "seller":
+        if (user) router.push("/seller");
+        break;
+      case "client":
+        if (user) router.push("/client");
+        break;
+      default:
+        router.push("/");
+        break;
+    }
+  }, [user, role]);
 
   return <>{children}</>;
 }
