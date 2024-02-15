@@ -45,10 +45,10 @@ const LogIn = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
-      <div>
-        <Button type="submit">Submit</Button>
+      <div className="flex space-x-5">
+        <Button onClick={() => router.push("/")}>Sign Up ? </Button>
+        <Button disabled={!email || !password} type="submit">Submit</Button>
       </div>
-      <Button onClick={() => router.push("/")}>Sign Up ? </Button>
     </form>
   );
 };
