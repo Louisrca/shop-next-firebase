@@ -1,5 +1,5 @@
 "use client";
-import React, { FormEvent, useContext, useState } from "react";
+import React, { FormEvent, useContext, useEffect, useState } from "react";
 import { useAuth } from "@/context/AuthUserProvider";
 import { db } from "../api/firebase-config";
 import app from "../api/firebase-config";
@@ -8,9 +8,12 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { getUserById } from "../api/user/user";
 
 export default function Home() {
   const { user, logOut } = useAuth();
+  
+
   const [productData, setProductData] = useState({
     title: "",
     description: "",
@@ -104,15 +107,14 @@ export default function Home() {
         </div>
         <div>
           <label> Description</label>
-           <Input
-          type="number"
-          name="price"
-          placeholder="Price"
-          onChange={handleInputChange}
-        />
-        
+          <Input
+            type="number"
+            name="price"
+            placeholder="Price"
+            onChange={handleInputChange}
+          />
         </div>
-       
+
         <Input type="file" onChange={handleFileChange} />
 
         <Button type="submit">Add Product</Button>
