@@ -1,9 +1,9 @@
 export interface Products {
-  id?: string | null
-  name?: string | null
-  price?: number | null
-  description?: string | null
-  file?: string | null
-  category?: string | null
-  user: string | null
+  id?: string | undefined
+  name?: string | undefined
+  price?: number | undefined
+  description?: string | undefined
+  file?: string | undefined
+  category?: string | undefined
+  user: string | undefined
 }

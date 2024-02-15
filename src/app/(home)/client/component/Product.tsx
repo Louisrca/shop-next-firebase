@@ -27,32 +27,35 @@ const Product = () => {
 
   return (
     <div>
-      {products.length <= 0 ? (
-        <p>Loading...</p>
-      ) : (
-        products.map((product) => (
-          
-          <Card key={product.id}>
-          <CardHeader>
-            <CardTitle>{product.name}</CardTitle>
-            <CardDescription>{product.description}</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <p>{product.price}</p>
-          </CardContent>
-          <CardContent>
-          {product.file && product.description ? (
-              <img src={product.file} alt={product.description} />
-            ) : (
-              <span>Image non disponible</span>
-            )}
-          </CardContent>
-          <CardFooter>
-            <p>{product.category}</p>
-          </CardFooter>
-        </Card>
-        ))
-      )}
+        <h1 style={{fontSize: 34, fontWeight:800}}>Tous les produits</h1>
+        <div style={{display : "grid", gridTemplateColumns:"1fr 1fr 1fr 1fr"}}>
+        {products.length <= 0 ? (
+            <p>Loading...</p>
+        ) : (
+            products.map((product) => (
+            
+            <Card key={product.id}>
+            <CardHeader>
+                <CardTitle>{product.name}</CardTitle>
+                <CardDescription>{product.description}</CardDescription>
+            </CardHeader>
+            <CardContent>
+                <p>{product.price}</p>
+            </CardContent>
+            <CardContent>
+            {product.file && product.description ? (
+                <img src={product.file} alt={product.description} />
+                ) : (
+                <span>Image non disponible</span>
+                )}
+            </CardContent>
+            <CardFooter>
+                <p>{product.category}</p>
+            </CardFooter>
+            </Card>
+            ))
+        )}
+        </div>
     </div>
   );
 };
