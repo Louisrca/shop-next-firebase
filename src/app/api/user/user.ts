@@ -1,6 +1,6 @@
 import { User } from "../../model/user";
 import { doc, getDoc } from "firebase/firestore";
-import { db } from "../firebase-config";
+import { db } from "../../config/firebase-config";
 
 export const getUserById = async (user: User, uid: string | null) => {
   if (user && uid) {

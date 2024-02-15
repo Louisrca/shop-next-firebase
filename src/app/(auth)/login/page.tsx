@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 
 import { useRouter } from "next/navigation";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../api/firebase-config";
+import { auth } from "../../config/firebase-config";
 
 const LogIn = () => {
   const [email, setEmail] = useState("");
@@ -42,7 +42,9 @@ const LogIn = () => {
       </div>
       <div className="flex space-x-5">
         <Button onClick={() => router.push("/")}>Sign Up ? </Button>
-        <Button disabled={!email || !password} type="submit">Submit</Button>
+        <Button disabled={!email || !password} type="submit">
+          Submit
+        </Button>
       </div>
     </form>
   );

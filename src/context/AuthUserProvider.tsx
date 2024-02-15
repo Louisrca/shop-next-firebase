@@ -1,7 +1,7 @@
 "use client";
 import React, { useContext, useState, createContext, useEffect } from "react";
 
-import { auth, db } from "../app/api/firebase-config";
+import { auth, db } from "../app/config/firebase-config";
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
@@ -10,14 +10,10 @@ import {
 } from "firebase/auth";
 
 import { doc, setDoc } from "firebase/firestore";
-
-export interface UserType {
-  email: string | null;
-  uid: string | null;
-}
+import { User } from "@/app/model/user";
 
 interface AuthContextType {
-  user: UserType | null;
+  user: User | null;
   logIn: (email: string, password: string) => Promise<void>;
   signUp: (
     email: string,
@@ -40,7 +36,7 @@ export const useAuth = (): AuthContextType => {
 };
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUser] = useState<UserType>({ email: null, uid: null });
+  const [user, setUser] = useState<User>({ email: null, uid: null });
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -68,7 +64,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     lastname: string,
     role: string,
   ): Promise<void> => {
-    // Assurez-vous que cette fonction ne retourne rien explicitement
     const userCredential = await createUserWithEmailAndPassword(
       auth,
       email,
@@ -83,21 +78,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         lastname: lastname,
         role: role,
       });
-      // Retiré la ligne 'return user;' pour respecter la signature de l'interface Promise<void>
     } else {
       throw new Error("User creation failed");
     }
   };
 
-  // Login the user
   const logIn = async (email: string, password: string): Promise<void> => {
-    // Assurez-vous que cette fonction ne retourne rien explicitement
     await signInWithEmailAndPassword(auth, email, password);
   };
 
-  // Logout the user
   const logOut = async (): Promise<void> => {
-    // Assurez-vous que cette fonction ne retourne rien explicitement
     await signOut(auth);
   };
 

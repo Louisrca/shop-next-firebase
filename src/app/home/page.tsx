@@ -1,24 +1,25 @@
 "use client";
 import React, { FormEvent, useEffect, useState } from "react";
 import { useAuth } from "@/context/AuthUserProvider";
-import app, { db } from "../api/firebase-config";
+import app, { db } from "../config/firebase-config";
 import { addDoc, collection, doc, getFirestore } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { getUserById } from "../api/user/user";
+
 import { User } from "../model/user";
+import { Products } from "../model/products";
 
 export default function Home() {
-  const { user, logOut } = useAuth();
+  const { user } = useAuth();
 
-  const [productData, setProductData] = useState({
-    file: "",
+  const [productData, setProductData] = useState<Products>({
     name: "",
     description: "",
     price: 0,
     category: "",
+    file: "",
   });
 
   let userRef: User | null = null;
@@ -92,7 +93,7 @@ export default function Home() {
         description: productData.description,
         price: productData.price,
         name: productData.name,
-        // user: userRef,
+        user: userRef,
       });
 
       console.log("Product uploaded successfully", productData);
