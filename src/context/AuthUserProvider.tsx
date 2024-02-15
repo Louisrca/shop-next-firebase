@@ -1,12 +1,5 @@
 "use client";
-import React, {
-  ReactNode,
-  useContext,
-  useState,
-  createContext,
-  useEffect,
-  use,
-} from "react";
+import React, { useContext, useState, createContext, useEffect } from "react";
 
 import { auth, db } from "../app/api/firebase-config";
 import {
@@ -16,25 +9,40 @@ import {
   signOut,
 } from "firebase/auth";
 
-import firebase from "firebase/app";
-import "firebase/firestore";
-import { doc, setDoc, serverTimestamp } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 
-interface UserType {
+export interface UserType {
   email: string | null;
   uid: string | null;
 }
 
-const AuthContext = createContext({});
+interface AuthContextType {
+  user: UserType | null;
+  logIn: (email: string, password: string) => Promise<void>;
+  signUp: (
+    email: string,
+    password: string,
+    firstname: string,
+    lastname: string,
+    role: string,
+  ) => Promise<void>;
+  logOut: () => Promise<void>;
+}
 
-export const useAuth = () => useContext<any>(AuthContext);
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
+
+export const useAuth = (): AuthContextType => {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error("useAuth must be used within an AuthProvider");
+  }
+  return context;
+};
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  // Define the constants for the user and loading state
   const [user, setUser] = useState<UserType>({ email: null, uid: null });
-  const [loading, setLoading] = useState<Boolean>(true);
+  const [loading, setLoading] = useState<boolean>(true);
 
-  // Update the state depending on auth
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -58,12 +66,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     password: string,
     firstname: string,
     lastname: string,
-    role: string
-  ) => {
+    role: string,
+  ): Promise<void> => {
+    // Assurez-vous que cette fonction ne retourne rien explicitement
     const userCredential = await createUserWithEmailAndPassword(
       auth,
       email,
-      password
+      password,
     );
     const user = userCredential.user;
     if (user) {
@@ -74,23 +83,24 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         lastname: lastname,
         role: role,
       });
-      return user;
+      // Retiré la ligne 'return user;' pour respecter la signature de l'interface Promise<void>
+    } else {
+      throw new Error("User creation failed");
     }
-    throw new Error("User creation failed");
   };
 
   // Login the user
-  const logIn = (email: string, password: string) => {
-    return signInWithEmailAndPassword(auth, email, password);
+  const logIn = async (email: string, password: string): Promise<void> => {
+    // Assurez-vous que cette fonction ne retourne rien explicitement
+    await signInWithEmailAndPassword(auth, email, password);
   };
 
   // Logout the user
-  const logOut = async () => {
-    setUser({ email: null, uid: null });
-    return await signOut(auth);
+  const logOut = async (): Promise<void> => {
+    // Assurez-vous que cette fonction ne retourne rien explicitement
+    await signOut(auth);
   };
 
-  // Wrap the children with the context provider
   return (
     <AuthContext.Provider value={{ user, signUp, logIn, logOut }}>
       {loading ? null : children}

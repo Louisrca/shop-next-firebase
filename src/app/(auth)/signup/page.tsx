@@ -16,8 +16,6 @@ const SignUp = () => {
   const router = useRouter();
   const { signUp } = useAuth();
 
-
-
   const handleOnSubmit = async (event: FormEvent) => {
     event.preventDefault();
     try {
