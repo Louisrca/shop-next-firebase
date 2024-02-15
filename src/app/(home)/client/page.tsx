@@ -1,20 +1,7 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import { useAuth } from "@/context/AuthUserProvider";
 
 const HomeClient = () => {
-  const { logOut } = useAuth();
-  return (
-    <div>
-      <Button
-        onClick={() => {
-          logOut();
-        }}
-      >
-        Logout
-      </Button>
-    </div>
-  );
+  return <div>Ceci est la page client</div>;
 };
 
 export default HomeClient;

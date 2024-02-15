@@ -22,8 +22,7 @@ const SignUp = () => {
       if (password)
         await signUp(email, password, firstname, lastname, role).then(() => {
           console.log("Success. The user is created in Firebase");
-
-          router.push("/home");
+          location.reload();
         });
     } catch (e) {
       console.log(e);

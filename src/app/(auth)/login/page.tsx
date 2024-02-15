@@ -19,7 +19,7 @@ const LogIn = () => {
       if (password)
         await signInWithEmailAndPassword(auth, email, password).then(() => {
           console.log("Success. The user is logged in Firebase");
-          router.push("/home");
+          location.reload();
         });
     } catch (e) {
       console.log(e);
