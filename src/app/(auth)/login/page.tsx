@@ -11,16 +11,12 @@ import {
 } from "firebase/auth";
 import { auth } from "../../api/firebase-config";
 
-// import { useAuth } from '../context/AuthUserContext';
-//
-//
 
 const LogIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
-  // const [error, setError] = useState<any>();
-  //
+
 
   const handleOnSubmit = async (event: FormEvent) => {
     event.preventDefault();
