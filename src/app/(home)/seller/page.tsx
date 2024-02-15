@@ -1,23 +1,28 @@
 "use client";
 import React, { FormEvent, useEffect, useState } from "react";
 import { useAuth } from "@/context/AuthUserProvider";
-import app, { db } from "../../config/firebase-config";
-import { addDoc, collection, doc, getFirestore } from "firebase/firestore";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { db } from "@/app/config/firebase-config";
+import { doc } from "firebase/firestore";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { User } from "../../model/user";
 
-const HomeSeller = () => {
+import { User } from "@/app/model/user";
+import { Products } from "@/app/model/products";
+
+import { createProduct } from "@/app/api/products/products";
+import { uploadFile } from "@/lib/uploadFile";
+
+export default function Home() {
   const { user } = useAuth();
 
-  const [productData, setProductData] = useState({
-    file: "",
+  const [productData, setProductData] = useState<Products>({
     name: "",
     description: "",
     price: 0,
     category: "",
+    file: "",
+    user: `/users/${user?.uid}`,
   });
 
   let userRef: User | null = null;
@@ -25,22 +30,6 @@ const HomeSeller = () => {
   useEffect(() => {
     console.log("useEffect", productData);
   }, [productData]);
-
-  const uploadFile = async (file: File): Promise<string> => {
-    const storage = getStorage(app);
-
-    const storageRef = ref(storage, `/products/${file.name}`);
-
-    try {
-      const snapshot = await uploadBytes(storageRef, file);
-
-      const fileUrl = await getDownloadURL(snapshot.ref);
-      return fileUrl;
-    } catch (error) {
-      console.error("Upload failed", error);
-      throw new Error("Upload failed: " + error);
-    }
-  };
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -84,15 +73,7 @@ const HomeSeller = () => {
     }
 
     try {
-      const firestore = getFirestore();
-      await addDoc(collection(firestore, "products"), {
-        ...productData,
-        category: productData.category,
-        description: productData.description,
-        price: productData.price,
-        name: productData.name,
-        // user: userRef,
-      });
+      await createProduct(productData);
 
       console.log("Product uploaded successfully", productData);
     } catch (error) {
@@ -144,6 +125,4 @@ const HomeSeller = () => {
       <Button type="submit">Add Product</Button>
     </form>
   );
-};
-
-export default HomeSeller;
+}
