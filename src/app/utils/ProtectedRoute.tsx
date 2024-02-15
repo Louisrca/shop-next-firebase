@@ -24,9 +24,7 @@ export default function ProtectedRoute({
       }
     };
     fetchData();
-  }, []);
 
-  useEffect(() => {
     if (user && role === "seller") {
       router.push("/home");
     } else if (user && role === "client") {
