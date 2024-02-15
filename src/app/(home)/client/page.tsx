@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthUserProvider";
 
 const HomeClient = () => {
-  const { user, logOut } = useAuth();
+  const { logOut } = useAuth();
   return (
     <div>
       <Button

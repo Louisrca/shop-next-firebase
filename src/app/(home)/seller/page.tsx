@@ -7,11 +7,10 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { getUserById } from "../../api/user/user";
 import { User } from "../../model/user";
 
 const HomeSeller = () => {
-  const { user, logOut } = useAuth();
+  const { user } = useAuth();
 
   const [productData, setProductData] = useState({
     file: "",

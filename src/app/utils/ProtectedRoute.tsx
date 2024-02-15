@@ -25,10 +25,10 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
 
       switch (role) {
         case "seller":
-          if (user) router.push("/home");
+          if (user) router.push("/seller");
           break;
         case "client":
-          if (user) router.push("/home-client");
+          if (user) router.push("/client");
           break;
         default:
           router.push("/");
@@ -36,18 +36,8 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
       }
     };
 
-    switch (role) {
-      case "seller":
-        if (user) router.push("/seller");
-        break;
-      case "client":
-        if (user) router.push("/client");
-        break;
-      default:
-        router.push("/");
-        break;
-    }
-  }, [user, role]);
+    fetchData();
+  }, [user, role, router]);
 
   return <>{children}</>;
 }
