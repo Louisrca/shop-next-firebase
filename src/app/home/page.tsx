@@ -11,6 +11,9 @@ import { Input } from "@/components/ui/input";
 import { User } from "../model/user";
 import { Products } from "../model/products";
 
+import { createProduct } from "../api/products/products";
+import { uploadFile } from "@/lib/uploadFile";
+
 export default function Home() {
   const { user } = useAuth();
 
@@ -20,6 +23,7 @@ export default function Home() {
     price: 0,
     category: "",
     file: "",
+    user: user?.uid ?? "",
   });
 
   let userRef: User | null = null;
@@ -27,22 +31,6 @@ export default function Home() {
   useEffect(() => {
     console.log("useEffect", productData);
   }, [productData]);
-
-  const uploadFile = async (file: File): Promise<string> => {
-    const storage = getStorage(app);
-
-    const storageRef = ref(storage, `/products/${file.name}`);
-
-    try {
-      const snapshot = await uploadBytes(storageRef, file);
-
-      const fileUrl = await getDownloadURL(snapshot.ref);
-      return fileUrl;
-    } catch (error) {
-      console.error("Upload failed", error);
-      throw new Error("Upload failed: " + error);
-    }
-  };
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -86,15 +74,7 @@ export default function Home() {
     }
 
     try {
-      const firestore = getFirestore();
-      await addDoc(collection(firestore, "products"), {
-        ...productData,
-        category: productData.category,
-        description: productData.description,
-        price: productData.price,
-        name: productData.name,
-        user: userRef,
-      });
+      await createProduct(productData);
 
       console.log("Product uploaded successfully", productData);
     } catch (error) {

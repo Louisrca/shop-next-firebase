@@ -1,3 +1,5 @@
+import { User } from "./user";
+
 export interface Products {
   id?: string | null;
   name?: string | null;
@@ -5,4 +7,5 @@ export interface Products {
   description?: string | null;
   file?: string | null;
   category?: string | null;
+  user: string | null;
 }
