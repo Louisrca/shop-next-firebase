@@ -23,6 +23,8 @@ export const getProducts = async () => {
   productsSnapshot.forEach((doc) => {
     products.push(doc.data() as Products);
   });
+
+  return products;
 };
 
 export const createProduct = async (product: Products) => {
