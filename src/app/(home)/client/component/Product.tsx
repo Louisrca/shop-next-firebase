@@ -9,27 +9,31 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
-  CardHeader,
   CardTitle,
 } from '@/components/ui/card'
 import Image from 'next/image'
-import { ShoppingBag } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+
+import AddToCart from './AddToCard'
 
 const Product = () => {
   const [products, setProducts] = useState<Products[]>([])
-  const [basket, setBasket] = useState<Products[]>([])
-  const handleAddProductInBasket = (id: string | null | undefined) => {
-    const product = products.find((item) => item.id === id)
 
-    if (product) {
-      const updatedBasket = [...basket, product]
-      setBasket(updatedBasket)
-      localStorage.setItem('basket', JSON.stringify(updatedBasket))
-    } else {
-      console.log("Le produit avec l'ID spécifié n'a pas été trouvé.")
-    }
+  const addToCartAction = async (product: Products) => {
+    setProducts((prevProducts) => {
+      const newProducts = prevProducts.map((prevProduct) => {
+        if (prevProduct.id === product.id) {
+          return {
+            ...prevProduct,
+            inCart: true,
+          }
+        }
+        return prevProduct
+      })
+      return newProducts
+    })
+
+    localStorage.setItem('cart', JSON.stringify([...products, product]))
+    return product
   }
 
   useEffect(() => {
@@ -74,9 +78,10 @@ const Product = () => {
                 <p>{product.price} €</p>
               </CardContent>
               <CardContent>
-                <Button onClick={() => handleAddProductInBasket(product.id)}>
-                  <ShoppingBag />
-                </Button>
+                <AddToCart
+                  addToCartAction={addToCartAction}
+                  currentProduct={product}
+                />
               </CardContent>
             </Card>
           ))

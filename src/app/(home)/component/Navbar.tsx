@@ -8,7 +8,6 @@ import { DropDownBasket } from './DropDownBasket'
 const Navbar = () => {
   const { user, logOut } = useAuth()
   const [role, setRole] = useState<string | null>(null)
-  console.log('🚀 ~ Navbar ~ ROLE DE LA NAVBAR:', role)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,35 +17,22 @@ const Navbar = () => {
       }
     }
     fetchData()
-  }, [])
+  }, [user])
 
   return (
     <nav
       style={{
         padding: '1%',
         width: '100%',
-        // backgroundColor: '#27272b',
         display: 'flex',
         justifyContent: 'flex-end',
         gap: 10,
       }}
     >
-      {role === 'client' ? (
-        <div>
-          <DropDownBasket />
-        </div>
-      ) : null}
-
-      <div>
-        <Button
-          variant={'destructive'}
-          onClick={() => {
-            logOut()
-          }}
-        >
-          Logout
-        </Button>
-      </div>
+      {role === 'client' && <DropDownBasket />}
+      <Button variant={'destructive'} onClick={logOut}>
+        Logout
+      </Button>
     </nav>
   )
 }

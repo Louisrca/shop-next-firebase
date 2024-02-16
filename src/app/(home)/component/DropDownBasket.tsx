@@ -9,25 +9,14 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { ShoppingCart } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { useCart } from '@/context/card/CardProvider'
 
 export function DropDownBasket() {
-  const [basketData, setBasketData] = useState<Products[] | null>([])
+  const { cart } = useCart()
 
-  useEffect(() => {
-    const fetchData = () => {
-      const basket = localStorage.getItem('basket')
-      if (basket) {
-        setBasketData(JSON.parse(basket))
-      } else {
-        setBasketData(null)
-      }
-    }
+  const basketData = cart
 
-    fetchData()
-  }, [])
-
-  console.log('🚀 ~ DropDownBasket ~ basketData:', basketData)
+  console.log(basketData)
 
   return (
     <DropdownMenu>
@@ -39,13 +28,13 @@ export function DropDownBasket() {
       <DropdownMenuContent className="w-56">
         <DropdownMenuLabel>My Cart</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        {basketData ? (
+        {basketData && basketData.length > 0 ? (
           basketData.map((basket: Products) => (
             <div
               key={basket.id}
               style={{ display: 'flex', flexDirection: 'row' }}
             >
-              <p>{basket.name} </p> <p> : {basket.price} €</p>
+              <p>{basket.name}</p> <p>: {basket.price} €</p>
             </div>
           ))
         ) : (

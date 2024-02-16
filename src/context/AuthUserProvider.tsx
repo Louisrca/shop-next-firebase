@@ -1,6 +1,5 @@
-'use client'
+"use client"
 import React, { useContext, useState, createContext, useEffect } from 'react'
-
 import { auth, db } from '../app/config/firebase-config'
 import {
   createUserWithEmailAndPassword,
@@ -8,9 +7,12 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from 'firebase/auth'
-
 import { doc, setDoc } from 'firebase/firestore'
-import { User } from '@/app/model/user'
+
+interface User {
+  email: string | null
+  uid: string | null
+}
 
 interface AuthContextType {
   user: User | null
@@ -29,34 +31,34 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 export const useAuth = (): AuthContextType => {
   const context = useContext(AuthContext)
-  if (context === undefined) {
+  if (!context) {
     throw new Error('useAuth must be used within an AuthProvider')
   }
   return context
 }
 
-export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUser] = useState<User>({ email: null, uid: null })
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
+  const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState<boolean>(true)
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
+    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+      if (firebaseUser) {
         setUser({
-          email: user.email,
-          uid: user.uid,
+          email: firebaseUser.email,
+          uid: firebaseUser.uid,
         })
       } else {
-        setUser({ email: null, uid: null })
+        setUser(null)
       }
+      setLoading(false)
     })
-
-    setLoading(false)
 
     return () => unsubscribe()
   }, [])
 
-  // Sign up the user
   const signUp = async (
     email: string,
     password: string,
@@ -64,36 +66,45 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     lastname: string,
     role: string
   ): Promise<void> => {
-    const userCredential = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
-    )
-    const user = userCredential.user
-    if (user) {
-      await setDoc(doc(db, 'users', user.uid), {
-        email: user.email,
-        id: user.uid,
-        firstname: firstname,
-        lastname: lastname,
-        role: role,
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      )
+      await setDoc(doc(db, 'users', userCredential.user.uid), {
+        email,
+        firstname,
+        lastname,
+        role,
       })
-    } else {
-      throw new Error('User creation failed')
+    } catch (error) {
+      console.error('SignUp error:', error)
+      throw error
     }
   }
 
   const logIn = async (email: string, password: string): Promise<void> => {
-    await signInWithEmailAndPassword(auth, email, password)
+    try {
+      await signInWithEmailAndPassword(auth, email, password)
+    } catch (error) {
+      console.error('LogIn error:', error)
+      throw error
+    }
   }
 
   const logOut = async (): Promise<void> => {
-    await signOut(auth)
+    try {
+      await signOut(auth)
+    } catch (error) {
+      console.error('LogOut error:', error)
+      throw error
+    }
   }
 
   return (
     <AuthContext.Provider value={{ user, signUp, logIn, logOut }}>
-      {loading ? null : children}
+      {!loading ? children : null}
     </AuthContext.Provider>
   )
 }
