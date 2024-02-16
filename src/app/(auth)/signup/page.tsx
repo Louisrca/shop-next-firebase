@@ -5,7 +5,6 @@ import { Input } from '@/components/ui/input'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/context/AuthUserProvider'
 import { Switch } from '@/components/ui/switch'
-import { Card } from '@/components/ui/card'
 
 const SignUp = () => {
   const [email, setEmail] = useState<string>('')
