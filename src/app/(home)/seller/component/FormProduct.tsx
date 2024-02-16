@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
 import { deleteProduct, updateProduct } from '@/app/api/products/products'
+import Image from 'next/image'
 
 const FormProduct = ({
   id,
@@ -82,14 +83,16 @@ const FormProduct = ({
           </CardContent>
           <CardContent>
             <CardTitle>Image</CardTitle>
-            <img
+            <Image
               style={{
                 margin: '4% 0 4% 0',
                 borderRadius: 8,
                 boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
               }}
-              src={productFile}
-              alt={productDescription}
+              height={34}
+              width={34}
+              src={productFile ?? ''}
+              alt={productDescription ?? ''}
             />
             <Input
               type="file"
@@ -112,14 +115,14 @@ const FormProduct = ({
           </CardContent>
         </form>
         <Button
-        onClick={() => {
-          handleDeleteProduct(id ?? '')
-        }}
-      >
-        Delete
-      </Button>
+          variant="destructive"
+          onClick={() => {
+            handleDeleteProduct(id ?? '')
+          }}
+        >
+          Delete
+        </Button>
       </Card>
-     
     </div>
   )
 }
