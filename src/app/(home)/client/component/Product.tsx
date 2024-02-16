@@ -34,19 +34,18 @@ const Product = () => {
           <p>Loading...</p>
         ) : (
           products.map((product) => (
-            <Card key={product.id}>
-              <CardHeader>
-                <CardTitle>{product.name}</CardTitle>
-                <CardDescription>{product.description}</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p>{product.price}</p>
-              </CardContent>
-              <CardContent>
+            <Card key={product.id} style={{ width: 300, margin: '0 0 6% 0' }}>
+              <CardContent style={{ padding: '0 0 0 0' }}>
                 {product.file && product.description ? (
                   <Image
-                    height={200}
-                    width={200}
+                    style={{
+                      margin: '0 0 6% 0',
+                      boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)',
+                      borderRadius: '6px 6px 0 0',
+                    }}
+                    height={100}
+                    width={300}
+                    sizes={'100vw'}
                     src={product.file}
                     alt={product.description}
                   />
@@ -54,9 +53,12 @@ const Product = () => {
                   <span>Image non disponible</span>
                 )}
               </CardContent>
-              <CardFooter>
-                <p>{product.category}</p>
-              </CardFooter>
+
+              <CardContent>
+                <CardTitle>{product.name}</CardTitle>
+                <CardDescription>{product.description}</CardDescription>
+                <p>{product.price} €</p>
+              </CardContent>
             </Card>
           ))
         )}

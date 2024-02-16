@@ -8,7 +8,7 @@ export default function HomeLayout({
   children: React.ReactNode
 }) {
   return (
-    <div>
+    <div style={{ padding: '2%' }}>
       <Navbar />
 
       {children}

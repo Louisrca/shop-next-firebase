@@ -136,11 +136,8 @@ const FormProduct = ({
                   width: 200,
                 }}
                 height={100}
-                width={200}
-                src={
-                  productFile ??
-                  URL.createObjectURL(selectedImage ?? new Blob())
-                }
+                width={300}
+                src={productFile}
                 alt={productDescription}
               />
             ) : (

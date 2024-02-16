@@ -8,6 +8,7 @@ const Navbar = () => {
     <nav>
       <div>
         <Button
+          variant={'outline'}
           onClick={() => {
             logOut()
           }}
