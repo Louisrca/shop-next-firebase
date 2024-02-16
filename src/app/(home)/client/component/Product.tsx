@@ -11,6 +11,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import Image from 'next/image'
 
 const Product = () => {
   const [products, setProducts] = useState<Products[]>([])
@@ -43,7 +44,8 @@ const Product = () => {
               </CardContent>
               <CardContent>
                 {product.file && product.description ? (
-                  <img src={product.file} alt={product.description} />
+                  <Image height={200} width={200}
+                    src={product.file} alt={product.description} />
                 ) : (
                   <span>Image non disponible</span>
                 )}

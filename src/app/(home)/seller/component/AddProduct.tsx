@@ -1,5 +1,5 @@
 'use client'
-import React, { FormEvent, useEffect, useState } from 'react'
+import React, { FormEvent, useState } from 'react'
 import { useAuth } from '@/context/AuthUserProvider'
 
 import { Products } from '@/app/model/products'
@@ -9,7 +9,6 @@ import { uploadFile } from '@/lib/uploadFile'
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { User } from '../../../model/user'
 
 const AddProduct = () => {
   const { user } = useAuth()
@@ -22,8 +21,6 @@ const AddProduct = () => {
     file: '',
     user: `/users/${user?.uid}`,
   })
-
-  let userRef: User | null = null
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files
