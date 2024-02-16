@@ -16,20 +16,21 @@ import {
 import Image from 'next/image'
 import { ShoppingBag } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { Baskets } from '@/app/model/baskets'
 
 const Product = () => {
   const [products, setProducts] = useState<Products[]>([])
   const [basket, setBasket] = useState<Products[]>([])
-  const handleAddProductInBasket = () => {
-    // Vérifier si le produit existe déjà dans le panier
+  const handleAddProductInBasket = (id: string | null | undefined) => {
+    const product = products.find((item) => item.id === id)
 
-    const updatedBasket = [...basket, products]
-    setBasket(updatedBasket)
-
-    localStorage.setItem('basket', JSON.stringify(updatedBasket))
+    if (product) {
+      const updatedBasket = [...basket, product]
+      setBasket(updatedBasket)
+      localStorage.setItem('basket', JSON.stringify(updatedBasket))
+    } else {
+      console.log("Le produit avec l'ID spécifié n'a pas été trouvé.")
+    }
   }
-  console.log('🚀 ~ Product ~ product:', basket)
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -73,7 +74,7 @@ const Product = () => {
                 <p>{product.price} €</p>
               </CardContent>
               <CardContent>
-                <Button>
+                <Button onClick={() => handleAddProductInBasket(product.id)}>
                   <ShoppingBag />
                 </Button>
               </CardContent>
