@@ -67,7 +67,7 @@ const Product = () => {
                   <Image
                     style={{
                       margin: '0 0 6% 0',
-                      boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)',
+                      // boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)',
                       borderRadius: '6px 6px 0 0',
                     }}
                     height={100}
