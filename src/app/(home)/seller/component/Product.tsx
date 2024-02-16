@@ -2,15 +2,8 @@
 
 import { Products } from "@/app/model/products";
 import { useEffect, useState } from "react";
-import { getProducts, updateProduct } from "../../../api/products/products";
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-  } from "@/components/ui/card"
+import { getProducts } from "../../../api/products/products";
+
 import FormProduct from "./FormProduct";
 
 const Product = () => {
@@ -27,9 +20,9 @@ const Product = () => {
     fetchProduct();
   }, []);
 
-  const handleOnSubmit=()=>{
-    // updateProduct({ ...productData, [e.target.name]: e.target.value })
-  }
+  // const handleOnSubmit=()=>{
+  //   // updateProduct({ ...productData, [e.target.name]: e.target.value })
+  // }
 
   return (
     <div>
@@ -40,7 +33,7 @@ const Product = () => {
         <p>Loading...</p>
       ) : (
         products.map((product) => (
-            <FormProduct id={product.id} name={product.name} description={product.description} price={product.price} file={product.file} category={product.category} user={product.user}  />
+            <FormProduct key={product.id} id={product.id} name={product.name} description={product.description} price={product.price} file={product.file} category={product.category} user={product.user}  />
         ))
       )}
     </div>

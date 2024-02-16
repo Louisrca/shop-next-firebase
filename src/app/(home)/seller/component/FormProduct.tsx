@@ -1,13 +1,11 @@
 "use client";
 
 import { Products } from "@/app/model/products";
-import { FormEvent, useEffect, useState } from "react";
-import { getProducts, updateProduct } from "../../../api/products/products";
+import { FormEvent, useState } from "react";
 import {
     Card,
     CardContent,
-    CardDescription,
-    CardFooter,
+
     CardHeader,
     CardTitle,
   } from "@/components/ui/card"
@@ -18,11 +16,11 @@ import { Button } from "@/components/ui/button";
 
 
 const FormProduct = ({id, name, description, price, file, category, user} : Products )=> {
-  const [productName, setProductName] = useState<string|undefined>(name)
-  const [productDescription, setProductDescription] = useState<string|undefined>(description)
-  const [productPrice, setProductPrice] = useState<string|undefined>(price)
-  const [productFile, setProductFile] = useState<string|undefined>(file)
-  const [productCategory, setProductCategory] = useState<string|undefined>(category)
+  const [productName, setProductName] = useState<string|undefined>(name??"")
+  const [productDescription, setProductDescription] = useState<string|undefined>(description ?? "")
+  const [productPrice, setProductPrice] = useState<string|undefined>(price ?? "")
+  const [productFile, setProductFile] = useState<string|undefined>(file ?? "")
+  const [productCategory, setProductCategory] = useState<string|undefined>(category ?? "") 
 
   
 
