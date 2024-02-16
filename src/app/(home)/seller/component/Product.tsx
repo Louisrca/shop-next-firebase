@@ -33,7 +33,7 @@ const Product = () => {
         <p>Loading...</p>
       ) : (
         products.map((product) => (
-            <FormProduct key={product.id} id={product.id} name={product.name} description={product.description} price={product.price} file={product.file} category={product.category} user={product.user}  />
+            <FormProduct key={product.id ?? ""} id={product.id} name={product.name} description={product.description} price={product.price} file={product.file} category={product.category} user={product.user}  />
         ))
       )}
     </div>

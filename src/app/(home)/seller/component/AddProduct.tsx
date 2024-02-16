@@ -1,8 +1,7 @@
 'use client'
 import React, { FormEvent, useEffect, useState } from 'react'
 import { useAuth } from '@/context/AuthUserProvider'
-import { db } from '../../../config/firebase-config'
-import { doc } from 'firebase/firestore'
+
 
 import { Products } from '@/app/model/products'
 
@@ -27,9 +26,6 @@ const AddProduct = () => {
 
   let userRef: User | null = null
 
-  useEffect(() => {
-    console.log('useEffect', productData)
-  }, [productData])
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files
@@ -60,12 +56,9 @@ const AddProduct = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    if (user && user.uid) {
-      userRef = doc(db, 'users', user.uid)
-      return userRef?.id
-    } else {
-      console.error('No user found')
-    }
+
+    console.log("toto")
+   
 
     if (!productData.file) {
       console.log('No file selected.')
@@ -80,6 +73,8 @@ const AddProduct = () => {
       console.error('An error occurred during the product upload:', error)
     }
   }
+
+
 
   return (
     <form onSubmit={handleSubmit} className="space-y-8">
