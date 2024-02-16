@@ -78,7 +78,7 @@ const FormProduct = ({
 
   return (
     <div>
-      <Card key={id} style={{ margin: 8, height: 700, width: 400 }}>
+      <Card key={id} style={{ height: '100%', width: 400 }}>
         <div
           style={{
             display: 'flex',
@@ -97,6 +97,41 @@ const FormProduct = ({
         </div>
         <form onSubmit={handleOnSubmit}>
           <CardHeader>
+            <CardContent>
+              <CardTitle>Image</CardTitle>
+              {productFile && productDescription ? (
+                <Image
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignContent: 'center',
+                    margin: '6% 0 6% 0',
+                    boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)',
+                    borderRadius: 6,
+
+                    width: '100%',
+                  }}
+                  height={50}
+                  width={300}
+                  sizes={'100vw'}
+                  src={
+                    productFile ??
+                    URL.createObjectURL(selectedImage ?? new Blob())
+                  }
+                  alt={productDescription}
+                />
+              ) : (
+                <span>Image non disponible</span>
+              )}
+              <Input
+                type="file"
+                onChange={(e) => {
+                  handleImageChange(e)
+                }}
+              />
+            </CardContent>
+          </CardHeader>
+          <CardContent>
             <CardTitle>Title</CardTitle>
             <Input
               value={productName ?? ''}
@@ -111,7 +146,8 @@ const FormProduct = ({
                 setProductDescription(e.target.value)
               }}
             />
-          </CardHeader>
+          </CardContent>
+
           <CardContent>
             <CardTitle>Price</CardTitle>
             <Input
@@ -122,37 +158,7 @@ const FormProduct = ({
               }}
             />
           </CardContent>
-          <CardContent>
-            <CardTitle>Image</CardTitle>
-            {productFile && productDescription ? (
-              <Image
-                style={{
-                  justifyContent: 'center',
-                  alignContent: 'center',
-                  margin: '6% 0 6% 0',
-                  boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)',
-                  borderRadius: 6,
-                  height: 100,
-                  width: 200,
-                }}
-                height={100}
-                width={300}
-                src={
-                  productFile ??
-                  URL.createObjectURL(selectedImage ?? new Blob())
-                }
-                alt={productDescription}
-              />
-            ) : (
-              <span>Image non disponible</span>
-            )}
-            <Input
-              type="file"
-              onChange={(e) => {
-                handleImageChange(e)
-              }}
-            />
-          </CardContent>
+
           <CardContent>
             <CardTitle>Category</CardTitle>
             <Input
@@ -163,7 +169,7 @@ const FormProduct = ({
             />
           </CardContent>
           <CardContent style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <Button>Update</Button>
+            <Button variant={'outline'}>Update</Button>
           </CardContent>
         </form>
       </Card>

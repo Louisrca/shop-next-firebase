@@ -3,7 +3,7 @@
 import { Products } from '@/app/model/products'
 import { useEffect, useState } from 'react'
 import { getProducts } from '../../../api/products/products'
-
+import s from './style.module.css'
 import FormProduct from './FormProduct'
 
 const Product = () => {
@@ -27,7 +27,7 @@ const Product = () => {
   return (
     <div>
       <h1 style={{ fontSize: 34, fontWeight: 800 }}>Tous les produits</h1>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr' }}>
+      <div className={s.formProduct}>
         {products.length <= 0 ? (
           <p>Loading...</p>
         ) : (

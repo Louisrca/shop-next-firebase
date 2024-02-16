@@ -9,6 +9,7 @@ import { uploadFile } from '@/lib/uploadFile'
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 const AddProduct = () => {
   const { user } = useAuth()
@@ -68,48 +69,61 @@ const AddProduct = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-8">
-      <div>
-        <label>Nom du produit</label>
-        <Input
-          type="text"
-          name="name"
-          placeholder="Nom du produit"
-          onChange={handleInputChange}
-        />
-      </div>
+    <Card style={{ width: 500 }}>
+      <CardHeader>
+        <CardTitle>Add New Product</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={handleSubmit} className="space-y-8">
+          <div>
+            <label>Nom du produit</label>
+            <Input
+              type="text"
+              name="name"
+              placeholder="Nom du produit"
+              onChange={handleInputChange}
+            />
+          </div>
 
-      <div>
-        <label>Description</label>
-        <Input
-          type="text"
-          name="description"
-          placeholder="Description du produit"
-          onChange={handleInputChange}
-        />
-      </div>
-      <div>
-        <label> Prix</label>
-        <Input
-          type="number"
-          name="price"
-          placeholder="Price"
-          onChange={handleInputChange}
-        />
-      </div>
-      <div>
-        <label> Categorie</label>
-        <Input
-          type="text"
-          name="category"
-          placeholder="Category"
-          onChange={handleInputChange}
-        />
-      </div>
-      <Input type="file" accept='accept="image/*' onChange={handleFileChange} />
+          <div>
+            <label>Description</label>
+            <Input
+              type="text"
+              name="description"
+              placeholder="Description du produit"
+              onChange={handleInputChange}
+            />
+          </div>
+          <div>
+            <label> Prix</label>
+            <Input
+              type="number"
+              name="price"
+              placeholder="Price"
+              onChange={handleInputChange}
+            />
+          </div>
+          <div>
+            <label> Categorie</label>
+            <Input
+              type="text"
+              name="category"
+              placeholder="Category"
+              onChange={handleInputChange}
+            />
+          </div>
+          <Input
+            type="file"
+            accept='accept="image/*'
+            onChange={handleFileChange}
+          />
 
-      <Button type="submit">Add Product</Button>
-    </form>
+          <Button variant={'outline'} type="submit">
+            Add Product
+          </Button>
+        </form>
+      </CardContent>
+    </Card>
   )
 }
 

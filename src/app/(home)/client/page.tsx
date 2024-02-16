@@ -1,13 +1,21 @@
 'use client'
 
-import BasketProduct from './component/BasketProduct'
 import Product from './component/Product'
 
 const HomeClient = () => {
   return (
-    <div>
-      <BasketProduct />
-      <Product />
+    <div
+      style={{
+        padding: '2%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'column',
+      }}
+    >
+      <div>
+        <Product />
+      </div>
     </div>
   )
 }

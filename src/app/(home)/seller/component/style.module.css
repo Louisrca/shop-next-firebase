@@ -1,0 +1,20 @@
+.formProduct {
+  display: grid;
+  grid-template-columns: 1fr; /* Commencez avec une seule colonne pour les appareils de petite taille */
+  gap: 10px;
+
+  /* Média query pour les écrans de taille moyenne et plus grands */
+}
+
+@media (min-width: 768px) {
+  .formProduct {
+    grid-template-columns: 1fr 1fr; /* Divisez en deux colonnes */
+  }
+}
+
+/* Média query pour les écrans plus larges */
+@media (min-width: 1024px) {
+  .formProduct {
+    grid-template-columns: 1fr 1fr 1fr; /* Divisez en trois colonnes */
+  }
+}

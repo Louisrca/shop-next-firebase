@@ -3,6 +3,8 @@
 import { Products } from '@/app/model/products'
 import { useEffect, useState } from 'react'
 import { getProducts } from '../../../api/products/products'
+import s from './style.module.css'
+
 import {
   Card,
   CardContent,
@@ -12,24 +14,35 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import Image from 'next/image'
+import { ShoppingBag } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Baskets } from '@/app/model/baskets'
 
 const Product = () => {
   const [products, setProducts] = useState<Products[]>([])
-  console.log('🚀 ~ Product ~ product:', products)
+  const [basket, setBasket] = useState<Products[]>([])
+  const handleAddProductInBasket = () => {
+    // Vérifier si le produit existe déjà dans le panier
+
+    const updatedBasket = [...basket, products]
+    setBasket(updatedBasket)
+
+    localStorage.setItem('basket', JSON.stringify(updatedBasket))
+  }
+  console.log('🚀 ~ Product ~ product:', basket)
 
   useEffect(() => {
     const fetchProduct = async () => {
       const productData = await getProducts()
       setProducts(productData)
     }
-
     fetchProduct()
   }, [])
 
   return (
     <div>
       <h1 style={{ fontSize: 34, fontWeight: 800 }}>Tous les produits</h1>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr' }}>
+      <div className={s.formProduct}>
         {products.length <= 0 ? (
           <p>Loading...</p>
         ) : (
@@ -58,6 +71,11 @@ const Product = () => {
                 <CardTitle>{product.name}</CardTitle>
                 <CardDescription>{product.description}</CardDescription>
                 <p>{product.price} €</p>
+              </CardContent>
+              <CardContent>
+                <Button>
+                  <ShoppingBag />
+                </Button>
               </CardContent>
             </Card>
           ))
