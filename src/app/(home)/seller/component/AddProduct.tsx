@@ -1,5 +1,5 @@
 'use client'
-import React, { FormEvent, useState } from 'react'
+import React, { ChangeEvent, FormEvent, useState } from 'react'
 import { useAuth } from '@/context/AuthUserProvider'
 
 import { Products } from '@/app/model/products'
@@ -22,7 +22,7 @@ const AddProduct = () => {
     user: `/users/${user?.uid}`,
   })
 
-  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files
 
     if (!files || files.length === 0) {

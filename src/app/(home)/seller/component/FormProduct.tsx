@@ -1,7 +1,7 @@
 'use client'
 
 import { Products } from '@/app/model/products'
-import { FormEvent, useState } from 'react'
+import { ChangeEvent, FormEvent, useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button'
 import { deleteProduct, updateProduct } from '@/app/api/products/products'
 import Image from 'next/image'
 import { Trash2 } from 'lucide-react'
+import { uploadFile } from '@/lib/uploadFile'
 
 const FormProduct = ({
   id,
@@ -19,19 +20,19 @@ const FormProduct = ({
   category,
   user,
 }: Products) => {
-  const [productName, setProductName] = useState<string | undefined>(name ?? '')
-  const [productDescription, setProductDescription] = useState<
-    string | undefined
-  >(description ?? '')
-  const [productPrice, setProductPrice] = useState<string | undefined>(
-    price ?? ''
+  const [productName, setProductName] = useState<string | null>(name ?? '')
+  const [productDescription, setProductDescription] = useState<string | null>(
+    description ?? ''
   )
-  const [productFile, setProductFile] = useState<string | undefined>(file ?? '')
-  const [productCategory, setProductCategory] = useState<string | undefined>(
+  const [productPrice, setProductPrice] = useState<string | null>(price ?? '')
+  const [productFile, setProductFile] = useState<string | null>(file ?? '')
+  const [productCategory, setProductCategory] = useState<string | null>(
     category ?? ''
   )
+  const [selectedImage, setSelectedImage] = useState<File | null>(null)
 
-  const handleOnSubmit = async () => {
+  const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
     const updatedProduct = {
       id,
       user: user,
@@ -43,18 +44,41 @@ const FormProduct = ({
     }
 
     await updateProduct(updatedProduct)
-    location.reload()
-
+    // location.reload()
   }
 
   const handleDeleteProduct = async (productId: string) => {
     await deleteProduct(productId)
-    location.reload()
+    // location.reload()
+  }
+
+  const handleImageChange = async (event: ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files) {
+      const imageFile = event.target.files[0]
+      setSelectedImage(imageFile)
+    }
+
+    const files = event.target.files
+
+    if (!files || files.length === 0) {
+      console.log('No file selected.')
+      return
+    }
+
+    const file = files[0]
+
+    try {
+      const fileUrl = await uploadFile(file)
+
+      setProductFile(fileUrl)
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   return (
     <div>
-      <Card key={id} style={{ margin: 8 }}>
+      <Card key={id} style={{ margin: 8, height: 700, width: 400 }}>
         <div
           style={{
             display: 'flex',
@@ -75,14 +99,14 @@ const FormProduct = ({
           <CardHeader>
             <CardTitle>Title</CardTitle>
             <Input
-              value={productName}
+              value={productName ?? ''}
               onChange={(e) => {
                 setProductName(e.target.value)
               }}
             />
             <CardTitle>Description</CardTitle>
             <Textarea
-              value={productDescription}
+              value={productDescription ?? ''}
               onChange={(e) => {
                 setProductDescription(e.target.value)
               }}
@@ -92,7 +116,7 @@ const FormProduct = ({
             <CardTitle>Price</CardTitle>
             <Input
               type="number"
-              value={productPrice}
+              value={productPrice ?? ''}
               onChange={(e) => {
                 setProductPrice(e.target.value)
               }}
@@ -103,13 +127,20 @@ const FormProduct = ({
             {productFile && productDescription ? (
               <Image
                 style={{
+                  justifyContent: 'center',
+                  alignContent: 'center',
                   margin: '6% 0 6% 0',
                   boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)',
                   borderRadius: 6,
+                  height: 100,
+                  width: 200,
                 }}
-                height={200}
-                width={300}
-                src={productFile}
+                height={100}
+                width={200}
+                src={
+                  productFile ??
+                  URL.createObjectURL(selectedImage ?? new Blob())
+                }
                 alt={productDescription}
               />
             ) : (
@@ -118,14 +149,14 @@ const FormProduct = ({
             <Input
               type="file"
               onChange={(e) => {
-                setProductFile(e.target.value)
+                handleImageChange(e)
               }}
             />
           </CardContent>
           <CardContent>
             <CardTitle>Category</CardTitle>
             <Input
-              value={productCategory}
+              value={productCategory ?? ''}
               onChange={(e) => {
                 setProductCategory(e.target.value)
               }}
