@@ -1,5 +1,4 @@
 'use client'
-import { type Products } from '@/app/model/products'
 import { Button } from '@/components/ui/button'
 import { useToast } from '@/components/ui/use-toast'
 import { useCart } from '@/context/card/CardProvider'

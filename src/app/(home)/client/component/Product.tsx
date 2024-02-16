@@ -17,7 +17,7 @@ import AddToCart from './AddToCard'
 
 const Product = () => {
   const [products, setProducts] = useState<Products[]>([])
-  const [productsCart, setProductsCart] = useState<Products>()
+  const [, setProductsCart] = useState<Products>()
 
   const addToCartAction = async (id: string) => {
     const selectedProduct = products.find((product) => product.id === id)

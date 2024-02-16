@@ -3,7 +3,6 @@ import { useAuth } from '@/context/AuthUserProvider'
 import { useRouter } from 'next/navigation'
 import React, { useEffect } from 'react'
 import { getUserById } from '../api/user/user'
-import { CartProvider } from '@/context/card/CardProvider'
 
 interface ProtectedRouteProps {
   children: React.ReactNode
