@@ -74,8 +74,8 @@
 /* Ajoutez des règles de style pour les tailles d'écran plus petites */
 @media screen and (max-width: 768px) {
   .authForm {
-    padding: 2%;
-    width: 10rem;
+    padding: 16%;
+    width: 20rem;
   }
 }
 
