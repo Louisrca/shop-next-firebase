@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input'
 import { useRouter } from 'next/navigation'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../config/firebase-config'
+import { Card, CardHeader, CardTitle } from '@/components/ui/card'
 
 const LogIn = () => {
   const [email, setEmail] = useState('')
@@ -27,26 +28,39 @@ const LogIn = () => {
   }
 
   return (
-    <form onSubmit={handleOnSubmit} className="space-y-8">
-      <div>
-        <label>Username</label>
-        <Input placeholder="email" onChange={(e) => setEmail(e.target.value)} />
-      </div>
-      <div>
-        <label>Password</label>
-        <Input
-          placeholder="password"
-          type="password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </div>
-      <div className="flex space-x-5">
-        <Button onClick={() => router.push('/')}>Sign Up ? </Button>
-        <Button disabled={!email || !password} type="submit">
-          Submit
-        </Button>
-      </div>
-    </form>
+    <div className="flex min-h-screen flex-col items-center justify-between p-24">
+      <Card style={{ padding: 24, width: 400 }}>
+        <CardHeader>
+          <CardTitle style={{ fontSize: 34 }}>Log In</CardTitle>
+        </CardHeader>
+
+        <form onSubmit={handleOnSubmit} className="space-y-8">
+          <div>
+            <label>Email</label>
+            <Input
+              placeholder="Email"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div>
+            <label>Mot de passe</label>
+            <Input
+              placeholder="Mot de passe"
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <div className="flex space-x-5">
+            <Button variant={'secondary'} onClick={() => router.push('/')}>
+              Sign Up ?{' '}
+            </Button>
+            <Button disabled={!email || !password} type="submit">
+              Valider
+            </Button>
+          </div>
+        </form>
+      </Card>
+    </div>
   )
 }
 

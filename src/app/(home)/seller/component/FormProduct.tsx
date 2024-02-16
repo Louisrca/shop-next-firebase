@@ -132,14 +132,16 @@ const FormProduct = ({
             </CardContent>
           </CardHeader>
           <CardContent>
-            <CardTitle>Title</CardTitle>
+            <CardTitle>Titre</CardTitle>
             <Input
               value={productName ?? ''}
               onChange={(e) => {
                 setProductName(e.target.value)
               }}
             />
-            <CardTitle>Description</CardTitle>
+          </CardContent>
+          <CardContent>
+            <CardTitle>Déscription</CardTitle>
             <Textarea
               value={productDescription ?? ''}
               onChange={(e) => {
@@ -149,7 +151,7 @@ const FormProduct = ({
           </CardContent>
 
           <CardContent>
-            <CardTitle>Price</CardTitle>
+            <CardTitle>Prix</CardTitle>
             <Input
               type="number"
               value={productPrice ?? ''}
@@ -160,7 +162,7 @@ const FormProduct = ({
           </CardContent>
 
           <CardContent>
-            <CardTitle>Category</CardTitle>
+            <CardTitle>Catégorie</CardTitle>
             <Input
               value={productCategory ?? ''}
               onChange={(e) => {
@@ -169,7 +171,7 @@ const FormProduct = ({
             />
           </CardContent>
           <CardContent style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <Button variant={'outline'}>Update</Button>
+            <Button variant={'outline'}>Mettre à jour</Button>
           </CardContent>
         </form>
       </Card>

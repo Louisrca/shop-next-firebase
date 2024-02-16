@@ -71,7 +71,7 @@ const AddProduct = () => {
   return (
     <Card style={{ width: 500 }}>
       <CardHeader>
-        <CardTitle>Add New Product</CardTitle>
+        <CardTitle>Ajouter un nouveau produit</CardTitle>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-8">
@@ -86,11 +86,11 @@ const AddProduct = () => {
           </div>
 
           <div>
-            <label>Description</label>
+            <label>Déscription</label>
             <Input
               type="text"
               name="description"
-              placeholder="Description du produit"
+              placeholder="Déscription du produit"
               onChange={handleInputChange}
             />
           </div>
@@ -99,16 +99,16 @@ const AddProduct = () => {
             <Input
               type="number"
               name="price"
-              placeholder="Price"
+              placeholder="Prix"
               onChange={handleInputChange}
             />
           </div>
           <div>
-            <label> Categorie</label>
+            <label> Catégorie</label>
             <Input
               type="text"
               name="category"
-              placeholder="Category"
+              placeholder="Catégorie"
               onChange={handleInputChange}
             />
           </div>
@@ -119,7 +119,7 @@ const AddProduct = () => {
           />
 
           <Button variant={'outline'} type="submit">
-            Add Product
+            Ajouter le produit
           </Button>
         </form>
       </CardContent>

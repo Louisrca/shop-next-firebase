@@ -50,7 +50,7 @@ const Product = () => {
       <h1 style={{ fontSize: 34, fontWeight: 800 }}>Tous les produits</h1>
       <div className={s.formProduct}>
         {products.length <= 0 ? (
-          <p>Loading...</p>
+          <p>Chargement...</p>
         ) : (
           products.map((product) => (
             <Card

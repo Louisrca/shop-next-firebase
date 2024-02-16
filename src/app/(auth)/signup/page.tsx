@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/context/AuthUserProvider'
 import { Switch } from '@/components/ui/switch'
+import { Card } from '@/components/ui/card'
 
 const SignUp = () => {
   const [email, setEmail] = useState<string>('')
@@ -36,27 +37,27 @@ const SignUp = () => {
         <Input placeholder="email" onChange={(e) => setEmail(e.target.value)} />
       </div>
       <div>
-        <label>Password</label>
+        <label>Prénom</label>
         <Input
-          placeholder="password"
-          type="password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </div>
-      <div>
-        <label>FirstName</label>
-        <Input
-          placeholder="firstname"
+          placeholder="Prénom"
           type="firstname"
           onChange={(e) => setFirstname(e.target.value)}
         />
       </div>
       <div>
-        <label>LastName</label>
+        <label>Nom</label>
         <Input
-          placeholder="lastname"
+          placeholder="Nom"
           type="lastname"
           onChange={(e) => setLastname(e.target.value)}
+        />
+      </div>
+      <div>
+        <label>Mot de passe</label>
+        <Input
+          placeholder="Mot de passe"
+          type="password"
+          onChange={(e) => setPassword(e.target.value)}
         />
       </div>
 
@@ -81,7 +82,7 @@ const SignUp = () => {
           disabled={!email || !password || !firstname || !lastname}
           type="submit"
         >
-          Submit
+          Valider
         </Button>
       </div>
     </form>
