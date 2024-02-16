@@ -36,7 +36,7 @@ export function DropDownBasket() {
       </DropdownMenuTrigger>
       <DropdownMenuContent
         className="w-56"
-        style={{ height: '100%', overflow: 'auto' }}
+        style={{ maxHeight: 500, overflow: 'auto' }}
       >
         <div
           style={{
