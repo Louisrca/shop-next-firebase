@@ -8,6 +8,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
 import { deleteProduct, updateProduct } from '@/app/api/products/products'
 import Image from 'next/image'
+import { Trash2 } from 'lucide-react'
 
 const FormProduct = ({
   id,
@@ -30,8 +31,7 @@ const FormProduct = ({
     category ?? ''
   )
 
-  const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  const handleOnSubmit = async () => {
     const updatedProduct = {
       id,
       user: user,
@@ -43,9 +43,10 @@ const FormProduct = ({
     }
 
     await updateProduct(updatedProduct)
+    location.reload()
+
   }
 
-  // TYpage html pour un onclick
   const handleDeleteProduct = async (productId: string) => {
     await deleteProduct(productId)
     location.reload()
@@ -54,6 +55,22 @@ const FormProduct = ({
   return (
     <div>
       <Card key={id} style={{ margin: 8 }}>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'flex-end',
+            margin: '6% 6% 0% 6%',
+          }}
+        >
+          <Button
+            variant="destructive"
+            onClick={() => {
+              handleDeleteProduct(id ?? '')
+            }}
+          >
+            <Trash2 />
+          </Button>
+        </div>
         <form onSubmit={handleOnSubmit}>
           <CardHeader>
             <CardTitle>Title</CardTitle>
@@ -85,8 +102,13 @@ const FormProduct = ({
             <CardTitle>Image</CardTitle>
             {productFile && productDescription ? (
               <Image
+                style={{
+                  margin: '6% 0 6% 0',
+                  boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)',
+                  borderRadius: 6,
+                }}
                 height={200}
-                width={200}
+                width={300}
                 src={productFile}
                 alt={productDescription}
               />
@@ -109,18 +131,10 @@ const FormProduct = ({
               }}
             />
           </CardContent>
-          <CardContent>
+          <CardContent style={{ display: 'flex', justifyContent: 'flex-end' }}>
             <Button>Update</Button>
           </CardContent>
         </form>
-        <Button
-          variant="destructive"
-          onClick={() => {
-            handleDeleteProduct(id ?? '')
-          }}
-        >
-          Delete
-        </Button>
       </Card>
     </div>
   )

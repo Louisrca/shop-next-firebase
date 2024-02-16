@@ -44,8 +44,12 @@ const Product = () => {
               </CardContent>
               <CardContent>
                 {product.file && product.description ? (
-                  <Image height={200} width={200}
-                    src={product.file} alt={product.description} />
+                  <Image
+                    height={200}
+                    width={200}
+                    src={product.file}
+                    alt={product.description}
+                  />
                 ) : (
                   <span>Image non disponible</span>
                 )}
