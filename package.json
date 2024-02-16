@@ -26,6 +26,11 @@
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.50.1",
+<<<<<<< Updated upstream
+=======
+    "react-switch": "^7.0.0",
+    "reactstrap": "^9.2.2",
+>>>>>>> Stashed changes
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
     "uuidv4": "^6.2.13",
