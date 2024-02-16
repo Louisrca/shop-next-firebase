@@ -12,7 +12,7 @@ import { ShoppingCart } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
 export function DropDownBasket() {
-  const [basketData, setBasketData] = useState(null)
+  const [basketData, setBasketData] = useState<Products[] | null>([])
 
   useEffect(() => {
     const fetchData = () => {
@@ -40,8 +40,13 @@ export function DropDownBasket() {
         <DropdownMenuLabel>My Cart</DropdownMenuLabel>
         <DropdownMenuSeparator />
         {basketData ? (
-          basketData.map((basket: any) => (
-            <div key={basket.id}>{basket.name}</div>
+          basketData.map((basket: Products) => (
+            <div
+              key={basket.id}
+              style={{ display: 'flex', flexDirection: 'row' }}
+            >
+              <p>{basket.name} </p> <p> : {basket.price} €</p>
+            </div>
           ))
         ) : (
           <div>Aucun produit</div>
