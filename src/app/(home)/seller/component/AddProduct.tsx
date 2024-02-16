@@ -61,7 +61,7 @@ const AddProduct = () => {
 
     try {
       await createProduct(productData)
-
+      location.reload()
       console.log('Product uploaded successfully', productData)
     } catch (error) {
       console.error('An error occurred during the product upload:', error)

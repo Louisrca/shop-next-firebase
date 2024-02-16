@@ -44,12 +44,12 @@ const FormProduct = ({
     }
 
     await updateProduct(updatedProduct)
-    // location.reload()
+    location.reload()
   }
 
   const handleDeleteProduct = async (productId: string) => {
     await deleteProduct(productId)
-    // location.reload()
+    location.reload()
   }
 
   const handleImageChange = async (event: ChangeEvent<HTMLInputElement>) => {
