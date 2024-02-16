@@ -74,7 +74,9 @@ const SignUp = () => {
         </div>
       </div>
       <div className="flex space-x-5">
-        <Button onClick={() => router.push('/login')}>Log In ? </Button>
+        <Button variant={'secondary'} onClick={() => router.push('/login')}>
+          Log In ?{' '}
+        </Button>
         <Button
           disabled={!email || !password || !firstname || !lastname}
           type="submit"

@@ -17,23 +17,24 @@ import AddToCart from './AddToCard'
 
 const Product = () => {
   const [products, setProducts] = useState<Products[]>([])
+  const [productsCart, setProductsCart] = useState<Products>()
 
-  const addToCartAction = async (product: Products) => {
-    setProducts((prevProducts) => {
-      const newProducts = prevProducts.map((prevProduct) => {
-        if (prevProduct.id === product.id) {
-          return {
-            ...prevProduct,
-            inCart: true,
-          }
-        }
-        return prevProduct
-      })
-      return newProducts
-    })
+  const addToCartAction = async (id: string) => {
+    const selectedProduct = products.find((product) => product.id === id)
 
-    localStorage.setItem('cart', JSON.stringify([...products, product]))
-    return product
+    if (selectedProduct) {
+      setProductsCart(selectedProduct)
+
+      const cart = JSON.parse(localStorage.getItem('cart') || '[]')
+
+      cart.push(selectedProduct)
+
+      localStorage.setItem('cart', JSON.stringify(cart))
+
+      return cart
+    }
+
+    return undefined
   }
 
   useEffect(() => {
@@ -52,8 +53,16 @@ const Product = () => {
           <p>Loading...</p>
         ) : (
           products.map((product) => (
-            <Card key={product.id} style={{ width: 300, margin: '0 0 6% 0' }}>
-              <CardContent style={{ padding: '0 0 0 0' }}>
+            <Card
+              key={product.id}
+              style={{
+                width: 300,
+                margin: '0 0 6% 0',
+                display: 'flex',
+                flexDirection: 'column',
+              }}
+            >
+              <CardContent style={{ padding: '0 0 0 0', flex: 1 }}>
                 {product.file && product.description ? (
                   <Image
                     style={{
@@ -77,10 +86,20 @@ const Product = () => {
                 <CardDescription>{product.description}</CardDescription>
                 <p>{product.price} €</p>
               </CardContent>
-              <CardContent>
+
+              <CardContent
+                style={{
+                  width: '100%',
+                  marginTop: 'auto',
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
                 <AddToCart
-                  addToCartAction={addToCartAction}
-                  currentProduct={product}
+                  addToCartAction={() => addToCartAction(product.id ?? '')}
+                  id={product.id ?? ''}
+                  toastDescription={product.name ?? ''}
+                  toastTitle={product.description ?? ''}
                 />
               </CardContent>
             </Card>

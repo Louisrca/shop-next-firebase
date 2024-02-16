@@ -1,3 +1,4 @@
+'use client'
 import React, {
   ReactNode,
   createContext,
@@ -41,18 +42,19 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     }
   }, [])
 
-  useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cart))
-  }, [cart])
-
   const addToCart = (product: Products) => {
     setCart((prevCart) => [...prevCart, product])
   }
 
   const removeFromCart = (productId: string) => {
-    setCart((prevCart) =>
-      prevCart.filter((product) => product.id !== productId)
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]')
+    const updatedCart = cart.filter(
+      (product: Products) => product.id !== productId
     )
+
+    localStorage.setItem('cart', JSON.stringify(updatedCart))
+    const newCartcart = JSON.parse(localStorage.getItem('cart') || '[]')
+    setCart(newCartcart)
   }
 
   return (

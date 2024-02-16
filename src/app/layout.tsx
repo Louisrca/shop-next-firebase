@@ -4,6 +4,7 @@ import './globals.css'
 
 import { AuthProvider } from '@/context/AuthUserProvider'
 import ProtectedRoute from './utils/ProtectedRoute'
+import { CartProvider } from '@/context/card/CardProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,7 +22,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <AuthProvider>
-          <ProtectedRoute>{children} </ProtectedRoute>{' '}
+          <CartProvider>
+            <ProtectedRoute>{children} </ProtectedRoute>{' '}
+          </CartProvider>
         </AuthProvider>
       </body>
     </html>
