@@ -16,7 +16,15 @@ export function DropDownBasket() {
   const { cart, removeFromCart } = useCart()
 
   const basketData = cart
-  const totalPrice = basketData.reduce((acc, basket) => acc + basket.price, 0)
+
+  const totalPrice = basketData.reduce((acc, basket) => {
+    const price =
+      typeof basket.price === 'number'
+        ? basket.price
+        : parseFloat(basket.price || '0')
+    return acc + price
+  }, 0)
+
   const uuid = v4()
 
   return (
@@ -66,6 +74,26 @@ export function DropDownBasket() {
             <Frown />
           </div>
         )}
+        <div
+          style={{
+            position: 'sticky',
+            bottom: 0,
+            width: '100%',
+            background: '#fff',
+          }}
+        >
+          <DropdownMenuSeparator />{' '}
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+            }}
+          >
+            <DropdownMenuLabel>Total :</DropdownMenuLabel>{' '}
+            <span style={{ fontSize: 14 }}>{totalPrice} €</span>
+          </div>
+        </div>
       </DropdownMenuContent>
     </DropdownMenu>
   )
