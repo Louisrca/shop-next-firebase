@@ -25,7 +25,7 @@ const Navbar = () => {
       style={{
         padding: '1%',
         width: '100%',
-        backgroundColor: '#27272b',
+        // backgroundColor: '#27272b',
         display: 'flex',
         justifyContent: 'flex-end',
         gap: 10,
