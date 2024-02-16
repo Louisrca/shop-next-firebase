@@ -36,7 +36,7 @@ export const createProduct = async (product: Products) => {
 export const updateProduct = async (product: Products) => {
     const productsCollectionRef = collection(db, 'products');
     const productDocRef = doc(productsCollectionRef, product.id!); 
-    await updateDoc(productDocRef, {product});
+    await updateDoc(productDocRef, product);
     return productDocRef.id;
 };
 

@@ -12,6 +12,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { updateProduct } from "@/app/api/products/products";
 
 
 
@@ -38,7 +39,7 @@ const FormProduct = ({id, name, description, price, file, category, user} : Prod
     //  il faut ajouter l'id dans la table de données /products
 
   
-    // await updateProduct(updatedProduct)
+    await updateProduct(updatedProduct)
 
   }
 
