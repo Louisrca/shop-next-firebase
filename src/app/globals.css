@@ -66,6 +66,18 @@
   }
 }
 
+.authForm {
+  padding: 2%; /* Utilisation d'une valeur relative */
+  width: 26rem; /* Utilisation d'une valeur fixe pour la largeur */
+}
+
+/* Ajoutez des règles de style pour les tailles d'écran plus petites */
+@media screen and (max-width: 768px) {
+  .signUp {
+    width: 100%; /* Ajustez la largeur pour occuper toute la largeur de l'écran */
+  }
+}
+
 @layer base {
   * {
     @apply border-border;

@@ -29,7 +29,7 @@ const LogIn = () => {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-between p-24">
-      <Card style={{ padding: '2%', width: '26em' }}>
+      <Card className="authForm">
         <CardHeader>
           <CardTitle style={{ fontSize: 34 }}>Log In</CardTitle>
         </CardHeader>
