@@ -1,6 +1,6 @@
 ## App Deployed On :
 
-[Window Shopper](https://auth-next-firebase.vercel.app/){:target="_blank"}
+<a href="https://auth-next-firebase.vercel.app/" target="_blank">Window Shopper</a>
 
 ## Getting Started
 
