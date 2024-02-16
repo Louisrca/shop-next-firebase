@@ -83,17 +83,16 @@ const FormProduct = ({
           </CardContent>
           <CardContent>
             <CardTitle>Image</CardTitle>
-            <Image
-              style={{
-                margin: '4% 0 4% 0',
-                borderRadius: 8,
-                boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
-              }}
-              height={34}
-              width={34}
-              src={productFile ?? ''}
-              alt={productDescription ?? ''}
-            />
+            {productFile && productDescription ? (
+              <Image
+                height={200}
+                width={200}
+                src={productFile}
+                alt={productDescription}
+              />
+            ) : (
+              <span>Image non disponible</span>
+            )}
             <Input
               type="file"
               onChange={(e) => {
