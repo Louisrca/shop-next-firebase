@@ -18,9 +18,9 @@ const LogIn = () => {
     try {
       if (password)
         await signInWithEmailAndPassword(auth, email, password).then(() => {
-          console.log("Success. The user is logged in Firebase");
-          location.reload();
-        });
+          console.log('Success. The user is logged in Firebase')
+          location.reload()
+        })
     } catch (e) {
       console.log(e)
     }

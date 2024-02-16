@@ -21,9 +21,9 @@ const SignUp = () => {
     try {
       if (password)
         await signUp(email, password, firstname, lastname, role).then(() => {
-          console.log("Success. The user is created in Firebase");
-          location.reload();
-        });
+          console.log('Success. The user is created in Firebase')
+          location.reload()
+        })
     } catch (e) {
       console.log(e)
     }

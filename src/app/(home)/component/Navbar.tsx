@@ -1,22 +1,22 @@
-import { Button } from "@/components/ui/button";
-import { useAuth } from "@/context/AuthUserProvider";
+import { Button } from '@/components/ui/button'
+import { useAuth } from '@/context/AuthUserProvider'
 
 const Navbar = () => {
-  const { logOut } = useAuth();
+  const { logOut } = useAuth()
 
   return (
     <nav>
       <div>
         <Button
           onClick={() => {
-            logOut();
+            logOut()
           }}
         >
           Logout
         </Button>
       </div>
     </nav>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar

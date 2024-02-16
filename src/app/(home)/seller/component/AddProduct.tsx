@@ -2,7 +2,6 @@
 import React, { FormEvent, useEffect, useState } from 'react'
 import { useAuth } from '@/context/AuthUserProvider'
 
-
 import { Products } from '@/app/model/products'
 
 import { createProduct } from '@/app/api/products/products'
@@ -18,14 +17,13 @@ const AddProduct = () => {
   const [productData, setProductData] = useState<Products>({
     name: '',
     description: '',
-    price: "0",
+    price: '0',
     category: '',
     file: '',
     user: `/users/${user?.uid}`,
   })
 
   let userRef: User | null = null
-
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files
@@ -56,9 +54,7 @@ const AddProduct = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-
-    console.log("toto")
-   
+    console.log('toto')
 
     if (!productData.file) {
       console.log('No file selected.')
@@ -73,8 +69,6 @@ const AddProduct = () => {
       console.error('An error occurred during the product upload:', error)
     }
   }
-
-
 
   return (
     <form onSubmit={handleSubmit} className="space-y-8">

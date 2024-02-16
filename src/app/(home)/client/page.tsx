@@ -1,7 +1,7 @@
-"use client";
+'use client'
 
-import BasketProduct from "./component/BasketProduct";
-import Product from "./component/Product";
+import BasketProduct from './component/BasketProduct'
+import Product from './component/Product'
 
 const HomeClient = () => {
   return (

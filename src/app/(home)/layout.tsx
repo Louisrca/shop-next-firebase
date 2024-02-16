@@ -1,12 +1,11 @@
-"use client";
+'use client'
 
-import Navbar from "./component/Navbar";
-
+import Navbar from './component/Navbar'
 
 export default function HomeLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
     <div>
@@ -14,5 +13,5 @@ export default function HomeLayout({
 
       {children}
     </div>
-  );
+  )
 }

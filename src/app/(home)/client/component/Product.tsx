@@ -1,63 +1,62 @@
-"use client";
+'use client'
 
-import { Products } from "@/app/model/products";
-import { useEffect, useState } from "react";
-import { getProducts } from "../../../api/products/products";
+import { Products } from '@/app/model/products'
+import { useEffect, useState } from 'react'
+import { getProducts } from '../../../api/products/products'
 import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-  } from "@/components/ui/card"
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
 
 const Product = () => {
-  const [products, setProducts] = useState<Products[]>([]);
-  console.log("🚀 ~ Product ~ product:", products);
+  const [products, setProducts] = useState<Products[]>([])
+  console.log('🚀 ~ Product ~ product:', products)
 
   useEffect(() => {
     const fetchProduct = async () => {
-      const productData = await getProducts();
-      setProducts(productData);
-    };
+      const productData = await getProducts()
+      setProducts(productData)
+    }
 
-    fetchProduct();
-  }, []);
+    fetchProduct()
+  }, [])
 
   return (
     <div>
-        <h1 style={{fontSize: 34, fontWeight:800}}>Tous les produits</h1>
-        <div style={{display : "grid", gridTemplateColumns:"1fr 1fr 1fr 1fr"}}>
+      <h1 style={{ fontSize: 34, fontWeight: 800 }}>Tous les produits</h1>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr' }}>
         {products.length <= 0 ? (
-            <p>Loading...</p>
+          <p>Loading...</p>
         ) : (
-            products.map((product) => (
-            
+          products.map((product) => (
             <Card key={product.id}>
-            <CardHeader>
+              <CardHeader>
                 <CardTitle>{product.name}</CardTitle>
                 <CardDescription>{product.description}</CardDescription>
-            </CardHeader>
-            <CardContent>
+              </CardHeader>
+              <CardContent>
                 <p>{product.price}</p>
-            </CardContent>
-            <CardContent>
-            {product.file && product.description ? (
-                <img src={product.file} alt={product.description} />
+              </CardContent>
+              <CardContent>
+                {product.file && product.description ? (
+                  <img src={product.file} alt={product.description} />
                 ) : (
-                <span>Image non disponible</span>
+                  <span>Image non disponible</span>
                 )}
-            </CardContent>
-            <CardFooter>
+              </CardContent>
+              <CardFooter>
                 <p>{product.category}</p>
-            </CardFooter>
+              </CardFooter>
             </Card>
-            ))
+          ))
         )}
-        </div>
+      </div>
     </div>
-  );
-};
+  )
+}
 
-export default Product;
+export default Product
