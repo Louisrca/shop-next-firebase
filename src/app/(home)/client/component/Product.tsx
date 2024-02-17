@@ -21,19 +21,17 @@ const Product = () => {
 
   const addToCartAction = async (id: string) => {
     const selectedProduct = products.find((product) => product.id === id)
-
+  
     if (selectedProduct) {
-      setProductsCart(selectedProduct)
-
       const cart = JSON.parse(localStorage.getItem('cart') || '[]')
-
+  
       cart.push(selectedProduct)
-
+  
       localStorage.setItem('cart', JSON.stringify(cart))
-
-      return cart
+  
+      return selectedProduct
     }
-
+  
     return undefined
   }
 
