@@ -86,11 +86,11 @@ const AddProduct = () => {
           </div>
 
           <div>
-            <label>Déscription</label>
+            <label>Description</label>
             <Input
               type="text"
               name="description"
-              placeholder="Déscription du produit"
+              placeholder="Description du produit"
               onChange={handleInputChange}
             />
           </div>

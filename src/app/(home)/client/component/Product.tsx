@@ -65,7 +65,7 @@ const Product = () => {
                     style={{
                       margin: '0 0 6% 0',
                       // boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)',
-                      borderRadius: '6px 6px 0 0',
+                      borderRadius: '0.5rem 0.5rem 0 0',
                     }}
                     height={100}
                     width={300}

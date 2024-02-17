@@ -107,7 +107,7 @@ const FormProduct = ({
                     alignContent: 'center',
                     margin: '6% 0 6% 0',
                     boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)',
-                    borderRadius: 6,
+                    borderRadius: '0.5rem',
 
                     width: '100%',
                   }}
@@ -141,7 +141,7 @@ const FormProduct = ({
             />
           </CardContent>
           <CardContent>
-            <CardTitle>Déscription</CardTitle>
+            <CardTitle>Description</CardTitle>
             <Textarea
               value={productDescription ?? ''}
               onChange={(e) => {
