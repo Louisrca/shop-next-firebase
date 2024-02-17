@@ -17,20 +17,21 @@ import AddToCart from './AddToCard'
 
 const Product = () => {
   const [products, setProducts] = useState<Products[]>([])
-
+  const [, setProduct] = useState<Products[]>([])
+  setProduct('3')
   const addToCartAction = async (id: string) => {
     const selectedProduct = products.find((product) => product.id === id)
-  
+
     if (selectedProduct) {
       const cart = JSON.parse(localStorage.getItem('cart') || '[]')
-  
+
       cart.push(selectedProduct)
-  
+
       localStorage.setItem('cart', JSON.stringify(cart))
-  
+
       return selectedProduct
     }
-  
+
     return undefined
   }
 
