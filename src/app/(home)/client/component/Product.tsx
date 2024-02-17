@@ -95,8 +95,8 @@ const Product = () => {
                 <AddToCart
                   addToCartAction={() => addToCartAction(product.id ?? '')}
                   id={product.id ?? ''}
-                  toastDescription={product.name ?? ''}
-                  toastTitle={product.description ?? ''}
+                  toastDescription={product.description ?? ''}
+                  toastTitle={product.name ?? ''}
                 />
               </CardContent>
             </Card>
