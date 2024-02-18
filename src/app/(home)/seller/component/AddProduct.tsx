@@ -98,6 +98,8 @@ const AddProduct = () => {
             <label> Prix</label>
             <Input
               type="number"
+              step="any"
+              min="0"
               name="price"
               placeholder="Prix"
               onChange={handleInputChange}

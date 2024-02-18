@@ -154,6 +154,8 @@ const FormProduct = ({
             <CardTitle>Prix</CardTitle>
             <Input
               type="number"
+              step="any"
+              min="0"
               value={productPrice ?? ''}
               onChange={(e) => {
                 setProductPrice(e.target.value)
