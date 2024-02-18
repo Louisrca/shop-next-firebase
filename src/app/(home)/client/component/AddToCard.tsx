@@ -25,12 +25,6 @@ const AddToCart: React.FC<AddToCartProps> = ({
 
   const handleAddToCart = async () => {
     try {
-      toast({
-        title: `Le produit ${toastTitle} a bien été ajouté dans le panier`,
-        description: `Description du produit : ${toastDescription} `,
-        action: <ToastAction altText="Goto schedule to undo">Undo</ToastAction>,
-      })
-
       const product = await addToCartAction(id)
       if (product !== undefined) addToCart(product)
     } catch (error) {
