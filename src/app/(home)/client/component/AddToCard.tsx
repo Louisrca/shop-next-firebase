@@ -2,7 +2,6 @@ import React from 'react'
 import { Button } from '@/components/ui/button'
 import { useToast } from '@/components/ui/use-toast'
 import { useCart } from '@/context/card/CardProvider'
-import { ToastAction } from '@radix-ui/react-toast'
 import { ShoppingBag } from 'lucide-react'
 
 import { Products } from '@/app/model/products'
