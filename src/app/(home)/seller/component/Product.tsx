@@ -2,30 +2,31 @@
 
 import { Products } from '@/app/model/products'
 import { useEffect, useState } from 'react'
-import { getProducts } from '../../../api/products/products'
+import { getProductsByUser } from '../../../api/products/products'
 import s from './style.module.css'
 import FormProduct from './FormProduct'
+import { useAuth } from '@/context/AuthUserProvider'
 
 const Product = () => {
   const [products, setProducts] = useState<Products[]>([])
-
-  console.log('🚀 ~ Product ~ product:', products)
+  const { user } = useAuth()
 
   useEffect(() => {
     const fetchProduct = async () => {
-      const productData = await getProducts()
+      const userID = user?.uid
+      const productData = await getProductsByUser(userID)
       setProducts(productData)
     }
 
     fetchProduct()
-  }, [])
+  }, [products])
 
   return (
     <div className="flex flex-col">
       <h2 className="my-5 text-xl font-bold">Tous les produits</h2>
       <div className={s.formProduct}>
         {products.length <= 0 ? (
-          <p>Chargement...</p>
+          <p>Aucun produit inseré !</p>
         ) : (
           products.map((product) => (
             <FormProduct
