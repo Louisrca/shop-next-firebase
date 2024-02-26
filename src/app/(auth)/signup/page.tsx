@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/context/AuthUserProvider'
 import { Switch } from '@/components/ui/switch'
+import { FirebaseError } from 'firebase/app'
 
 const SignUp = () => {
   const [email, setEmail] = useState<string>('')
@@ -37,19 +38,21 @@ const SignUp = () => {
           console.log('Success. The user is created in Firebase')
           location.reload()
         })
-    } catch (e: any) {
-      switch (e.code) {
-        case 'auth/email-already-in-use':
-          setEmailError('Cette adresse e-mail est déjà utilisée.')
-          break
-        case 'auth/weak-password':
-          setPasswordError(
-            'Le mot de passe doit contenir au moins 10 caractères avec au moins une majuscule, un chiffre et un caractère spécial.'
-          )
-          break
-        case 'auth/invalid-email':
-          setEmailError('Adresse e-mail invalide.')
-          break
+    } catch (e) {
+      if (e instanceof FirebaseError) {
+        switch (e.code) {
+          case 'auth/email-already-in-use':
+            setEmailError('Cette adresse e-mail est déjà utilisée.')
+            break
+          case 'auth/weak-password':
+            setPasswordError(
+              'Le mot de passe doit contenir au moins 10 caractères avec au moins une majuscule, un chiffre et un caractère spécial.'
+            )
+            break
+          case 'auth/invalid-email':
+            setEmailError('Adresse e-mail invalide.')
+            break
+        }
       }
     }
   }

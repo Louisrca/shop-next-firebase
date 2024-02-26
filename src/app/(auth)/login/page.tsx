@@ -1,5 +1,6 @@
 'use client'
 import { useState, FormEvent } from 'react'
+import { FirebaseError } from 'firebase/app'
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -8,6 +9,8 @@ import { useRouter } from 'next/navigation'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../config/firebase-config'
 import { Card, CardHeader } from '@/components/ui/card'
+
+
 
 const LogIn = () => {
   const [email, setEmail] = useState('')
@@ -23,13 +26,15 @@ const LogIn = () => {
           console.log('Success. The user is logged in Firebase')
           location.reload()
         })
-    } catch (e: any) {
+    } catch (e) {
       console.log(e)
-      switch (e.code) {
-        case 'auth/invalid-credential':
-          setUserError("L'adresse e-mail ou le mot de passe est incorrect.")
+      if (e instanceof FirebaseError) {
+        switch (e.code) {
+          case 'auth/invalid-credential':
+            setUserError("L'adresse e-mail ou le mot de passe est incorrect.")
 
-          break
+            break
+        }
       }
     }
   }

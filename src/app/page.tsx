@@ -1,6 +1,6 @@
 'use client'
 
-import { Card, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardHeader } from '@/components/ui/card'
 import SignUp from './(auth)/signup/page'
 
 export default function Home() {
