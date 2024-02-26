@@ -20,17 +20,10 @@ const Product = () => {
     fetchProduct()
   }, [])
 
-  // const handleOnSubmit=()=>{
-  //   // updateProduct({ ...productData, [e.target.name]: e.target.value })
-  // }
-
   return (
-    <div>
-      <h1 style={{ fontSize: 34, fontWeight: 800 }}>
-        Bienvenue dans la partie Produit
-      </h1>
+    <div className="flex flex-col">
+      <h2 className="my-5 text-xl font-bold">Tous les produits</h2>
       <div className={s.formProduct}>
-        <h2>Tous les produits</h2>
         {products.length <= 0 ? (
           <p>Chargement...</p>
         ) : (

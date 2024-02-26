@@ -125,7 +125,7 @@ const FormProduct = ({
               )}
               <Input
                 type="file"
-                accept='accept="image/jpeg, image/png'
+                accept='accept="image/jpeg, image/png, image/jpg'
                 onChange={(e) => {
                   handleImageChange(e)
                 }}

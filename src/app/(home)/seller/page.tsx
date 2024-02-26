@@ -14,6 +14,9 @@ const HomeSeller = () => {
         flexDirection: 'column',
       }}
     >
+      <h1 style={{ fontSize: 34, fontWeight: 800 }}>
+        Bienvenue dans la partie Produit
+      </h1>
       <div>
         <AddProduct />
       </div>
