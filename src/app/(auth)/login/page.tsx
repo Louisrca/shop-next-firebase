@@ -12,6 +12,9 @@ import { Card, CardHeader, CardTitle } from '@/components/ui/card'
 const LogIn = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [emailError, setEmailError] = useState<string>()
+  const [passwordError, setPasswordError] = useState<string>()
+  const [userError, setUserError] = useState<string>()
   const router = useRouter()
 
   const handleOnSubmit = async (event: FormEvent) => {
@@ -22,20 +25,36 @@ const LogIn = () => {
           console.log('Success. The user is logged in Firebase')
           location.reload()
         })
-    } catch (e) {
+    } catch (e: any) {
       console.log(e)
+      switch (e.code) {
+        case 'auth/invalid-credential':
+          setUserError("L'adresse e-mail ou le mot de passe est incorrect.")
+
+          break
+      }
     }
   }
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-between p-24">
+    <div className="flex min-h-screen flex-col items-center p-24">
+      <h1 className="mb-2 text-xl font-extrabold tracking-tight lg:text-3xl">
+        WINDOW SHOPPER
+      </h1>
       <Card className="authForm">
         <CardHeader>
-          <CardTitle style={{ fontSize: 34 }}>Log In</CardTitle>
+          <h2 className="scroll-m-20 text-xl font-extrabold tracking-tight lg:text-3xl">
+            Log In
+          </h2>
         </CardHeader>
 
         <form onSubmit={handleOnSubmit} className="space-y-8">
-          <div>
+          <div className="flex flex-col">
+            {userError ? (
+              <span className="text-red-500">{userError} </span>
+            ) : (
+              ''
+            )}
             <label>Email</label>
             <Input
               placeholder="Email"

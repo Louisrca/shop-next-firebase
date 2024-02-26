@@ -14,6 +14,8 @@ const SignUp = () => {
   const [checked, setChecked] = useState(true)
   const [role, setRole] = useState('client')
   const router = useRouter()
+  const [emailError, setEmailError] = useState<string>()
+  const [passwordError, setPasswordError] = useState<string>()
   const { signUp } = useAuth()
 
   const handleOnSubmit = async (event: FormEvent) => {
@@ -24,14 +26,27 @@ const SignUp = () => {
           console.log('Success. The user is created in Firebase')
           location.reload()
         })
-    } catch (e) {
-      console.log(e)
+    } catch (e: any) {
+      switch (e.code) {
+        case 'auth/email-already-in-use':
+          setEmailError('Cette adresse e-mail est déjà utilisée.')
+          break
+        case 'auth/weak-password':
+          setPasswordError(
+            'Le mot de passe est trop faible. Il faut au moins 6 caractères.'
+          )
+          break
+        case 'auth/invalid-email':
+          setEmailError('Adresse e-mail invalide.')
+          break
+      }
     }
   }
 
   return (
     <form onSubmit={handleOnSubmit} className="space-y-8">
-      <div>
+      <div className="flex flex-col">
+        {emailError ? <span className="text-red-500">{emailError} </span> : ''}
         <label>Email</label>
         <Input placeholder="email" onChange={(e) => setEmail(e.target.value)} />
       </div>
@@ -51,7 +66,12 @@ const SignUp = () => {
           onChange={(e) => setLastname(e.target.value)}
         />
       </div>
-      <div>
+      <div className="flex flex-col">
+        {passwordError ? (
+          <span className="text-red-500">{passwordError} </span>
+        ) : (
+          ''
+        )}
         <label>Mot de passe</label>
         <Input
           placeholder="Mot de passe"
@@ -74,7 +94,11 @@ const SignUp = () => {
         </div>
       </div>
       <div className="flex space-x-5">
-        <Button variant={'secondary'} onClick={() => router.push('/login')}>
+        <Button
+          variant={'secondary'}
+          className="transition duration-500 hover:bg-gray-700 hover:text-white"
+          onClick={() => router.push('/login')}
+        >
           Log In ?{' '}
         </Button>
         <Button

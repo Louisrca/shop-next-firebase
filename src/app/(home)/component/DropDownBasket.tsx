@@ -35,8 +35,11 @@ export function DropDownBasket() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
-        className="w-56"
-        style={{ maxHeight: 500, overflow: 'auto' }}
+        style={{
+          maxHeight: 500,
+          overflow: 'auto',
+          marginRight: 20,
+        }}
       >
         <div
           style={{
@@ -53,7 +56,12 @@ export function DropDownBasket() {
           basketData.map((basket: Products) => (
             <div
               key={basket.id + uuid}
-              style={{ display: 'flex', flexDirection: 'row', margin: 8 }}
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                flexWrap: 'wrap',
+                margin: 8,
+              }}
             >
               <div style={{ margin: 2 }}>
                 <span>{basket.name}</span>

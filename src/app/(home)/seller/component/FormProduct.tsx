@@ -125,9 +125,11 @@ const FormProduct = ({
               )}
               <Input
                 type="file"
+                accept='accept="image/jpeg, image/png'
                 onChange={(e) => {
                   handleImageChange(e)
                 }}
+                required
               />
             </CardContent>
           </CardHeader>
@@ -138,6 +140,7 @@ const FormProduct = ({
               onChange={(e) => {
                 setProductName(e.target.value)
               }}
+              required
             />
           </CardContent>
           <CardContent>
@@ -147,6 +150,7 @@ const FormProduct = ({
               onChange={(e) => {
                 setProductDescription(e.target.value)
               }}
+              required
             />
           </CardContent>
 
@@ -160,6 +164,7 @@ const FormProduct = ({
               onChange={(e) => {
                 setProductPrice(e.target.value)
               }}
+              required
             />
           </CardContent>
 
@@ -170,6 +175,7 @@ const FormProduct = ({
               onChange={(e) => {
                 setProductCategory(e.target.value)
               }}
+              required
             />
           </CardContent>
           <CardContent style={{ display: 'flex', justifyContent: 'flex-end' }}>

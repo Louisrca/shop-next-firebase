@@ -26,8 +26,11 @@ const Product = () => {
 
   return (
     <div>
-      <h1 style={{ fontSize: 34, fontWeight: 800 }}>Tous les produits</h1>
+      <h1 style={{ fontSize: 34, fontWeight: 800 }}>
+        Bienvenue dans la partie Produit
+      </h1>
       <div className={s.formProduct}>
+        <h2>Tous les produits</h2>
         {products.length <= 0 ? (
           <p>Chargement...</p>
         ) : (

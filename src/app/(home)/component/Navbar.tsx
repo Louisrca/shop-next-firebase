@@ -31,7 +31,7 @@ const Navbar = () => {
     >
       {role === 'client' && <DropDownBasket />}
       <Button variant={'destructive'} onClick={logOut}>
-        Logout
+        Déconnexion
       </Button>
     </nav>
   )

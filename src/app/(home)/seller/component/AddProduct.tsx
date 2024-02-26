@@ -82,6 +82,7 @@ const AddProduct = () => {
               name="name"
               placeholder="Nom du produit"
               onChange={handleInputChange}
+              required
             />
           </div>
 
@@ -92,6 +93,7 @@ const AddProduct = () => {
               name="description"
               placeholder="Description du produit"
               onChange={handleInputChange}
+              required
             />
           </div>
           <div>
@@ -103,6 +105,7 @@ const AddProduct = () => {
               name="price"
               placeholder="Prix"
               onChange={handleInputChange}
+              required
             />
           </div>
           <div>
@@ -112,11 +115,12 @@ const AddProduct = () => {
               name="category"
               placeholder="Catégorie"
               onChange={handleInputChange}
+              required
             />
           </div>
           <Input
             type="file"
-            accept='accept="image/*'
+            accept='accept="image/jpeg, image/png'
             onChange={handleFileChange}
           />
 
