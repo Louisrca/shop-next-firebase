@@ -18,8 +18,19 @@ const SignUp = () => {
   const [passwordError, setPasswordError] = useState<string>()
   const { signUp } = useAuth()
 
+  const validatePassword = (password: string): boolean => {
+    const passwordRegex = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{10,})/
+    return passwordRegex.test(password)
+  }
+
   const handleOnSubmit = async (event: FormEvent) => {
     event.preventDefault()
+    if (!validatePassword(password)) {
+      setPasswordError(
+        'Le mot de passe doit contenir au moins 10 caractères avec au moins une majuscule, un chiffre et un caractère spécial.'
+      )
+      return
+    }
     try {
       if (password)
         await signUp(email, password, firstname, lastname, role).then(() => {
@@ -33,7 +44,7 @@ const SignUp = () => {
           break
         case 'auth/weak-password':
           setPasswordError(
-            'Le mot de passe est trop faible. Il faut au moins 6 caractères.'
+            'Le mot de passe doit contenir au moins 10 caractères avec au moins une majuscule, un chiffre et un caractère spécial.'
           )
           break
         case 'auth/invalid-email':
