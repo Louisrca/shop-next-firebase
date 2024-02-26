@@ -71,10 +71,18 @@ const LogIn = () => {
             />
           </div>
           <div className="flex space-x-5">
-            <Button variant={'secondary'} onClick={() => router.push('/')}>
+            <Button
+              variant={'secondary'}
+              className="transition duration-500 hover:bg-slate-950 hover:text-white"
+              onClick={() => router.push('/')}
+            >
               Sign Up ?{' '}
             </Button>
-            <Button disabled={!email || !password} type="submit">
+            <Button
+              disabled={!email || !password}
+              className="transition duration-500 hover:bg-slate-600 hover:text-white"
+              type="submit"
+            >
               Valider
             </Button>
           </div>
