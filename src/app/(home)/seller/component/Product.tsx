@@ -19,7 +19,7 @@ const Product = () => {
     }
 
     fetchProduct()
-  }, [products])
+  }, [])
 
   return (
     <div className="flex flex-col">

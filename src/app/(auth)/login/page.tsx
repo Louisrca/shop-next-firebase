@@ -10,8 +10,6 @@ import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../config/firebase-config'
 import { Card, CardHeader } from '@/components/ui/card'
 
-
-
 const LogIn = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')

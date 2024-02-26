@@ -1,4 +1,4 @@
-"use client"
+'use client'
 import React, { useContext, useState, createContext, useEffect } from 'react'
 import { auth, db } from '../app/config/firebase-config'
 import {
@@ -96,6 +96,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const logOut = async (): Promise<void> => {
     try {
       await signOut(auth)
+      location.reload()
     } catch (error) {
       console.error('LogOut error:', error)
       throw error
