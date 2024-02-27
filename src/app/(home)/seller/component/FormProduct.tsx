@@ -29,20 +29,23 @@ const FormProduct = ({
   const [productCategory, setProductCategory] = useState<string | null>(
     category ?? ''
   )
+
   const [selectedImage, setSelectedImage] = useState<File | null>(null)
 
   const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const updatedProduct = {
-      id,
+    const productID = crypto.randomUUID()
+
+    const updatedProduct: Products = {
+      id: id,
       user: user,
       name: productName,
       description: productDescription,
       price: productPrice,
       file: productFile,
       category: productCategory,
+      productId: productID, // Utilisation de 'productId' au lieu de 'productID'
     }
-
     await updateProduct(updatedProduct)
     location.reload()
   }

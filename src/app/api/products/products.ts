@@ -75,6 +75,7 @@ export const updateProduct = async (product: Products) => {
     file: product.file,
     category: product.category,
     user: product.user,
+    productId: '',
   }
 
   await updateDoc(productDocRef, productDataToUpdate)
