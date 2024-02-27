@@ -69,7 +69,7 @@ export function DropDownBasket() {
                 <span>: {basket.price} €</span>{' '}
               </div>
               <div style={{ margin: '0 2px 0 6px' }}>
-                <Button onClick={() => removeFromCart(basket.productId)}>
+                <Button onClick={() => removeFromCart(basket.productId ?? '')}>
                   -
                 </Button>
               </div>
