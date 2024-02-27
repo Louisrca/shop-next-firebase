@@ -15,7 +15,7 @@ import { v4 } from 'uuid'
 export function DropDownBasket() {
   const { cart, removeFromCart } = useCart()
 
-  const basketData = cart
+  const basketData = Array.isArray(cart) ? cart : [];
 
   const totalPrice = basketData.reduce((acc, basket) => {
     const price =

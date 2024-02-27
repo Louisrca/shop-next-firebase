@@ -22,8 +22,12 @@ const Product = () => {
     const selectedProduct = products.find((product) => product.id === id)
 
     if (selectedProduct) {
-      const cart = JSON.parse(localStorage.getItem('cart') || '[]')
+      let cart = JSON.parse(localStorage.getItem('cart') || '[]')
 
+      if (!Array.isArray(cart)) {
+        cart = [];
+      }
+  
       cart.push(selectedProduct)
 
       localStorage.setItem('cart', JSON.stringify(cart))

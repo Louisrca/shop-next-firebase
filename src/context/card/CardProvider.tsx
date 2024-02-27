@@ -43,18 +43,18 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   }, [])
 
   const addToCart = (product: Products) => {
-    setCart((prevCart) => [...prevCart, product])
+    setCart((prevCart) => {
+      const cartArray = Array.isArray(prevCart) ? prevCart : [];
+      return [...cartArray, product];
+    });
   }
 
   const removeFromCart = (productId: string) => {
-    const cart = JSON.parse(localStorage.getItem('cart') || '[]')
-    const updatedCart = cart.filter(
-      (product: Products) => product.id !== productId
-    )
-
-    localStorage.setItem('cart', JSON.stringify(updatedCart))
-    const newCartcart = JSON.parse(localStorage.getItem('cart') || '[]')
-    setCart(newCartcart)
+    setCart(prevCart => {
+      const updatedCart = prevCart.filter(product => product.id !== productId);
+      localStorage.setItem('cart', JSON.stringify(updatedCart));
+      return updatedCart;
+    });
   }
 
   return (
