@@ -44,17 +44,20 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 
   const addToCart = (product: Products) => {
     setCart((prevCart) => {
-      const cartArray = Array.isArray(prevCart) ? prevCart : [];
-      return [...cartArray, product];
-    });
+      const cartArray = Array.isArray(prevCart) ? prevCart : []
+      return [...cartArray, product]
+    })
   }
 
   const removeFromCart = (productId: string) => {
-    setCart(prevCart => {
-      const updatedCart = prevCart.filter(product => product.id !== productId);
-      localStorage.setItem('cart', JSON.stringify(updatedCart));
-      return updatedCart;
-    });
+    const updatedCart = cart.filter(
+      (product) => product.productId !== productId
+    )
+
+    setCart(updatedCart)
+
+    localStorage.setItem('cart', JSON.stringify(updatedCart))
+    return updatedCart
   }
 
   return (

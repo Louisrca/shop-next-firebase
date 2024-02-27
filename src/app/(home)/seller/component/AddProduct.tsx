@@ -21,6 +21,7 @@ const AddProduct = () => {
     category: '',
     file: '',
     user: `/users/${user?.uid}`,
+    productId: crypto.randomUUID(),
   })
 
   const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {

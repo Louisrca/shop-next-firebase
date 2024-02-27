@@ -38,6 +38,7 @@ const Product = () => {
               file={product.file}
               category={product.category}
               user={product.user}
+              productId={''}
             />
           ))
         )}

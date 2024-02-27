@@ -1,4 +1,5 @@
 export interface Products {
+  productId: string
   id?: string | null
   name?: string | null
   price?: string | null

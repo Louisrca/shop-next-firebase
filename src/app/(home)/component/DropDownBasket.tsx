@@ -10,12 +10,13 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Frown, ShoppingCart } from 'lucide-react'
 import { useCart } from '@/context/card/CardProvider'
-import { v4 } from 'uuid'
 
 export function DropDownBasket() {
   const { cart, removeFromCart } = useCart()
 
-  const basketData = Array.isArray(cart) ? cart : [];
+  const basketData = Array.isArray(cart) ? cart : []
+
+  console.log(basketData)
 
   const totalPrice = basketData.reduce((acc, basket) => {
     const price =
@@ -24,8 +25,6 @@ export function DropDownBasket() {
         : parseFloat(basket.price || '0')
     return acc + price
   }, 0)
-
-  const uuid = v4()
 
   return (
     <DropdownMenu>
@@ -55,7 +54,7 @@ export function DropDownBasket() {
         {basketData && basketData.length > 0 ? (
           basketData.map((basket: Products) => (
             <div
-              key={basket.id + uuid}
+              key={basket.productId}
               style={{
                 display: 'flex',
                 flexDirection: 'row',
@@ -70,7 +69,7 @@ export function DropDownBasket() {
                 <span>: {basket.price} €</span>{' '}
               </div>
               <div style={{ margin: '0 2px 0 6px' }}>
-                <Button onClick={() => removeFromCart(basket.id ?? '')}>
+                <Button onClick={() => removeFromCart(basket.productId)}>
                   -
                 </Button>
               </div>

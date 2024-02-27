@@ -19,25 +19,34 @@ const Product = () => {
   const [products, setProducts] = useState<Products[]>([])
 
   const addToCartAction = async (id: string) => {
-    const selectedProduct = products.find((product) => product.id === id)
+    const selectedProductIndex = products.findIndex(
+      (product) => product.id === id
+    )
 
-    if (selectedProduct) {
+    if (selectedProductIndex !== -1) {
       let cart = JSON.parse(localStorage.getItem('cart') || '[]')
 
       if (!Array.isArray(cart)) {
-        cart = [];
+        cart = []
       }
-  
-      cart.push(selectedProduct)
+
+      const productID = crypto.randomUUID()
+      console.log(productID)
+
+      const selectedProductWithID = {
+        ...products[selectedProductIndex],
+        productId: productID,
+      }
+
+      cart.push(selectedProductWithID)
 
       localStorage.setItem('cart', JSON.stringify(cart))
 
-      return selectedProduct
+      return selectedProductWithID
     }
 
     return undefined
   }
-
   useEffect(() => {
     const fetchProduct = async () => {
       const productData = await getProducts()
@@ -74,6 +83,7 @@ const Product = () => {
                       // boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)',
                       borderRadius: '0.5rem 0.5rem 0 0',
                     }}
+                    priority
                     height={100}
                     width={300}
                     sizes={'100vw'}
