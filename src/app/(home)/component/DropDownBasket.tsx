@@ -16,8 +16,6 @@ export function DropDownBasket() {
 
   const basketData = Array.isArray(cart) ? cart : []
 
-  console.log(basketData)
-
   const totalPrice = basketData.reduce((acc, basket) => {
     const price =
       typeof basket.price === 'number'

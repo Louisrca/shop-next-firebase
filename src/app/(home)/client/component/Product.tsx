@@ -31,7 +31,6 @@ const Product = () => {
       }
 
       const productID = crypto.randomUUID()
-      console.log(productID)
 
       const selectedProductWithID = {
         ...products[selectedProductIndex],

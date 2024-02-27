@@ -33,10 +33,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 
   useEffect(() => {
     const storedCart = localStorage.getItem('cart')
-    console.log(
-      'Chargement du panier depuis localStorage',
-      storedCart ? JSON.parse(storedCart) : 'Aucun panier'
-    )
+
     if (storedCart) {
       setCart(JSON.parse(storedCart))
     }
