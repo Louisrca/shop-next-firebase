@@ -92,6 +92,7 @@ const FormProduct = ({
           <Button
             aria-label="Supprimer le produit"
             variant="destructive"
+            className="transition duration-500 hover:bg-red-400/75 hover:text-white"
             onClick={() => {
               handleDeleteProduct(id ?? '')
             }}
