@@ -129,6 +129,7 @@ const FormProduct = ({
               )}
               <Input
                 type="file"
+                aria-required="true"
                 aria-label="Inserer une image du produit"
                 accept='accept="image/jpeg, image/png, image/jpg'
                 onChange={(e) => {
@@ -141,6 +142,7 @@ const FormProduct = ({
           <CardContent>
             <CardTitle>Titre</CardTitle>
             <Input
+              aria-required="true"
               aria-label="Changer le nom du produit"
               value={productName ?? ''}
               onChange={(e) => {
@@ -152,6 +154,7 @@ const FormProduct = ({
           <CardContent>
             <CardTitle>Description</CardTitle>
             <Textarea
+              aria-required="true"
               aria-label="Changer la description du produit"
               value={productDescription ?? ''}
               onChange={(e) => {
@@ -165,6 +168,7 @@ const FormProduct = ({
             <CardTitle>Prix</CardTitle>
             <Input
               type="number"
+              aria-required="true"
               step="any"
               min="0"
               value={productPrice ?? ''}
@@ -180,6 +184,7 @@ const FormProduct = ({
             <CardTitle>Catégorie</CardTitle>
             <Input
               value={productCategory ?? ''}
+              aria-required="true"
               aria-label="Changer la catégorie du produit"
               onChange={(e) => {
                 setProductCategory(e.target.value)

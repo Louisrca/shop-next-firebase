@@ -68,6 +68,7 @@ export function DropDownBasket() {
               </div>
               <div style={{ margin: '0 2px 0 6px' }}>
                 <Button
+                  title="Supprimer l'élément du panier"
                   aria-label="Supprimer l'élément du panier"
                   onClick={() => removeFromCart(basket.productId ?? '')}
                 >
