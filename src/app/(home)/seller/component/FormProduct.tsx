@@ -135,7 +135,6 @@ const FormProduct = ({
                 onChange={(e) => {
                   handleImageChange(e)
                 }}
-                required
               />
             </CardContent>
           </CardHeader>
@@ -148,7 +147,6 @@ const FormProduct = ({
               onChange={(e) => {
                 setProductName(e.target.value)
               }}
-              required
             />
           </CardContent>
           <CardContent>
@@ -160,7 +158,6 @@ const FormProduct = ({
               onChange={(e) => {
                 setProductDescription(e.target.value)
               }}
-              required
             />
           </CardContent>
 
@@ -176,7 +173,6 @@ const FormProduct = ({
               onChange={(e) => {
                 setProductPrice(e.target.value)
               }}
-              required
             />
           </CardContent>
 
