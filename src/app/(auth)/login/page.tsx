@@ -39,7 +39,7 @@ const LogIn = () => {
 
   return (
     <div className="flex min-h-screen flex-col items-center p-24">
-      <h1 className="mb-2 text-xl font-extrabold tracking-tight lg:text-3xl">
+      <h1 className="mb-8 text-xl font-extrabold tracking-tight lg:text-3xl">
         WINDOW SHOPPER
       </h1>
       <Card className="authForm">
