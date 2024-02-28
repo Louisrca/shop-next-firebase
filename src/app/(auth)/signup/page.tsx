@@ -62,11 +62,16 @@ const SignUp = () => {
       <div className="flex flex-col">
         {emailError ? <span className="text-red-500">{emailError} </span> : ''}
         <label>Email</label>
-        <Input placeholder="email" onChange={(e) => setEmail(e.target.value)} />
+        <Input
+          aria-label="Votre Email"
+          placeholder="email"
+          onChange={(e) => setEmail(e.target.value)}
+        />
       </div>
       <div>
         <label>Prénom</label>
         <Input
+          aria-label="Votre prénom"
           placeholder="Prénom"
           type="firstname"
           onChange={(e) => setFirstname(e.target.value)}
@@ -75,6 +80,7 @@ const SignUp = () => {
       <div>
         <label>Nom</label>
         <Input
+          aria-label="Votre nom"
           placeholder="Nom"
           type="lastname"
           onChange={(e) => setLastname(e.target.value)}
@@ -88,6 +94,7 @@ const SignUp = () => {
         )}
         <label>Mot de passe</label>
         <Input
+          aria-label="Votre mot de passe"
           placeholder="Mot de passe"
           type="password"
           onChange={(e) => setPassword(e.target.value)}
@@ -98,6 +105,7 @@ const SignUp = () => {
         <label>Role</label>
         <div className="flex space-x-4">
           <Switch
+            aria-label="Changer de rôle"
             checked={checked}
             onClick={() => {
               setChecked(!checked)
@@ -109,6 +117,7 @@ const SignUp = () => {
       </div>
       <div className="flex space-x-5">
         <Button
+          aria-label="Naviguer vers la page de connexion"
           variant={'secondary'}
           className="transition duration-500 hover:bg-slate-900 hover:text-white"
           onClick={() => router.push('/login')}
@@ -116,6 +125,7 @@ const SignUp = () => {
           Log In ?{' '}
         </Button>
         <Button
+          aria-label="Valider l'inscription"
           disabled={!email || !password || !firstname || !lastname}
           className="transition duration-500  hover:bg-slate-600 hover:text-white"
           type="submit"

@@ -58,6 +58,7 @@ const LogIn = () => {
             )}
             <label>Email</label>
             <Input
+              aria-label="Votre Email"
               placeholder="Email"
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -65,6 +66,7 @@ const LogIn = () => {
           <div>
             <label>Mot de passe</label>
             <Input
+              aria-label="Votre mot de passe"
               placeholder="Mot de passe"
               type="password"
               onChange={(e) => setPassword(e.target.value)}
@@ -72,6 +74,7 @@ const LogIn = () => {
           </div>
           <div className="flex space-x-5">
             <Button
+              aria-label="Naviguer vers la page de création de compte"
               variant={'secondary'}
               className="transition duration-500 hover:bg-slate-950 hover:text-white"
               onClick={() => router.push('/')}
@@ -80,6 +83,7 @@ const LogIn = () => {
             </Button>
             <Button
               disabled={!email || !password}
+              aria-label="Valider la connexion"
               className="transition duration-500 hover:bg-slate-600 hover:text-white"
               type="submit"
             >

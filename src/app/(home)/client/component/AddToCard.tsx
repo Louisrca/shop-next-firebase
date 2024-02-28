@@ -34,6 +34,7 @@ const AddToCart: React.FC<AddToCartProps> = ({
   return (
     <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
       <Button
+        aria-label="Ajouter Rapide au panier"
         style={{ width: '100%' }}
         onClick={() => {
           handleAddToCart()

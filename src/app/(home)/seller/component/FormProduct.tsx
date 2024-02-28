@@ -90,6 +90,7 @@ const FormProduct = ({
           }}
         >
           <Button
+            aria-label="Supprimer le produit"
             variant="destructive"
             onClick={() => {
               handleDeleteProduct(id ?? '')
@@ -128,6 +129,7 @@ const FormProduct = ({
               )}
               <Input
                 type="file"
+                aria-label="Inserer une image du produit"
                 accept='accept="image/jpeg, image/png, image/jpg'
                 onChange={(e) => {
                   handleImageChange(e)
@@ -139,6 +141,7 @@ const FormProduct = ({
           <CardContent>
             <CardTitle>Titre</CardTitle>
             <Input
+              aria-label="Changer le nom du produit"
               value={productName ?? ''}
               onChange={(e) => {
                 setProductName(e.target.value)
@@ -149,6 +152,7 @@ const FormProduct = ({
           <CardContent>
             <CardTitle>Description</CardTitle>
             <Textarea
+              aria-label="Changer la description du produit"
               value={productDescription ?? ''}
               onChange={(e) => {
                 setProductDescription(e.target.value)
@@ -164,6 +168,7 @@ const FormProduct = ({
               step="any"
               min="0"
               value={productPrice ?? ''}
+              aria-label="Changer le prix du produit"
               onChange={(e) => {
                 setProductPrice(e.target.value)
               }}
@@ -175,6 +180,7 @@ const FormProduct = ({
             <CardTitle>Catégorie</CardTitle>
             <Input
               value={productCategory ?? ''}
+              aria-label="Changer la catégorie du produit"
               onChange={(e) => {
                 setProductCategory(e.target.value)
               }}
@@ -182,7 +188,9 @@ const FormProduct = ({
             />
           </CardContent>
           <CardContent style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <Button variant={'outline'}>Mettre à jour</Button>
+            <Button variant={'outline'} aria-label="Mettre à jour le produit">
+              Mettre à jour
+            </Button>
           </CardContent>
         </form>
       </Card>

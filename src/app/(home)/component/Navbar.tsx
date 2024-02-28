@@ -30,7 +30,7 @@ const Navbar = () => {
       }}
     >
       {role === 'client' && <DropDownBasket />}
-      <Button variant={'destructive'} onClick={logOut}>
+      <Button aria-label="Déconnexion" variant={'destructive'} onClick={logOut}>
         Déconnexion
       </Button>
     </nav>

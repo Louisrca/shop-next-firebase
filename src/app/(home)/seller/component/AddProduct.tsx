@@ -81,6 +81,7 @@ const AddProduct = () => {
             <Input
               type="text"
               name="name"
+              aria-label="Nom du produit"
               placeholder="Nom du produit"
               onChange={handleInputChange}
               required
@@ -92,6 +93,7 @@ const AddProduct = () => {
             <Input
               type="text"
               name="description"
+              aria-label="Description du produit"
               placeholder="Description du produit"
               onChange={handleInputChange}
               required
@@ -104,6 +106,7 @@ const AddProduct = () => {
               step="any"
               min="0"
               name="price"
+              aria-label="Prix du produit"
               placeholder="Prix"
               onChange={handleInputChange}
               required
@@ -114,6 +117,7 @@ const AddProduct = () => {
             <Input
               type="text"
               name="category"
+              aria-label="Catégorie du produit"
               placeholder="Catégorie"
               onChange={handleInputChange}
               required
@@ -121,11 +125,16 @@ const AddProduct = () => {
           </div>
           <Input
             type="file"
+            aria-label="Inserer un fichier"
             accept='accept="image/jpeg, image/png, image/jpg'
             onChange={handleFileChange}
           />
 
-          <Button variant={'outline'} type="submit">
+          <Button
+            aria-label="Ajouter le produit"
+            variant={'outline'}
+            type="submit"
+          >
             Ajouter le produit
           </Button>
         </form>
